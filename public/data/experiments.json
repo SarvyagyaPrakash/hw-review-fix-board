@@ -1,26 +1,26 @@
 {
   "onboarding_confusion|product-analyst": {
-    "experiment": "Simplify auction tutorial by removing advanced bidding options and adding visual cues for basic mechanics.",
+    "experiment": "Simplify the initial auction tutorial by removing advanced bidding options and adding contextual tooltips for new users.",
     "metric": "tutorial completion rate",
-    "metric_note": "Higher completion indicates clearer onboarding and reduced initial confusion.",
+    "metric_note": "Measure percentage of new users finishing the simplified onboarding flow.",
     "source": "AI-suggested"
   },
   "onboarding_confusion|ui-ux-designer": {
-    "experiment": "Add interactive tooltips explaining auction mechanics during the first three minutes of gameplay.",
+    "experiment": "Add interactive tooltips explaining auction mechanics and squad roles during the initial tutorial sequence.",
     "metric": "task success rate",
-    "metric_note": "Measure percentage of new users completing initial tutorial steps correctly.",
+    "metric_note": "Measure percentage of new users completing the first auction successfully.",
     "source": "AI-suggested"
   },
   "onboarding_confusion|product-associate": {
-    "experiment": "Simplify the initial auction tutorial by removing advanced bidding options and adding visual progress indicators for new players.",
+    "experiment": "Add interactive tooltips explaining auction mechanics and squad roles during the initial tutorial sequence.",
     "metric": "tutorial completion rate",
-    "metric_note": "Higher completion indicates reduced confusion and better understanding of core mechanics.",
+    "metric_note": "Higher completion indicates users successfully grasped basic rules and mechanics.",
     "source": "AI-suggested"
   },
   "tutorial_length|product-associate": {
-    "experiment": "Implement a 'Skip Tutorial' button for users with prior experience to reduce friction.",
+    "experiment": "Implement a 'Skip Tutorial' button for returning players to reduce friction and respect their existing knowledge.",
     "metric": "time to first match",
-    "metric_note": "Lower time indicates faster onboarding and reduced tutorial friction.",
+    "metric_note": "Lower values indicate faster onboarding and reduced tutorial friction for experienced users.",
     "source": "AI-suggested"
   },
   "tutorial_length|growth-analyst": {
@@ -30,81 +30,81 @@
     "source": "AI-suggested"
   },
   "auction_issues|game-developer": {
-    "experiment": "Test dynamic bid extension logic to reduce last-second sniping and improve perceived fairness in auctions.",
+    "experiment": "Test dynamic auction closing delays based on active bidder count to reduce UI lag and missed bids.",
     "metric": "match length",
-    "metric_note": "Monitor if auction delays increase total session duration significantly.",
+    "metric_note": "Monitor if auction delays significantly increase total match duration.",
     "source": "AI-suggested"
   },
   "auction_issues|ui-ux-designer": {
-    "experiment": "Reduce auction UI lag by optimizing asset loading to improve bid submission speed and reliability.",
+    "experiment": "Reduce auction bid button latency by 50ms to improve timing precision for fast-paced bidding scenarios.",
     "metric": "first-bid success rate",
-    "metric_note": "Higher rate indicates smoother, more reliable initial bid placement.",
+    "metric_note": "Measure percentage of users successfully placing their initial bid without error.",
     "source": "AI-suggested"
   },
   "auction_issues|product-associate": {
-    "experiment": "Implement a 5-second bid lockout to reduce bot spam and UI lag during final auction seconds.",
+    "experiment": "Implement a 5-second bid lockout to prevent bot spam and reduce UI lag during final seconds.",
     "metric": "support tickets per 1,000 daily users",
-    "metric_note": "Lower values indicate reduced user frustration and improved auction stability.",
+    "metric_note": "Lower values indicate fewer reported auction issues and improved stability.",
     "source": "AI-suggested"
   },
   "lag_performance|software-engineer": {
-    "experiment": "Reduce particle effects in high-density combat zones to lower GPU load and improve frame stability.",
+    "experiment": "Reduce particle effects in high-density areas to lower GPU load and improve frame consistency.",
     "metric": "p95 frame time",
-    "metric_note": "Lower values indicate smoother performance; target sub-16ms for 60fps consistency.",
+    "metric_note": "Lower values indicate smoother performance and reduced lag for most users.",
     "source": "AI-suggested"
   },
   "lag_performance|data-analyst": {
-    "experiment": "Test frame rate stability on mid-tier Androids to identify specific performance degradation triggers.",
+    "experiment": "Test frame rate stability on low-end devices after implementing new texture compression algorithms.",
     "metric": "retention by device tier",
-    "metric_note": "Monitor if mid-tier retention improves after performance optimizations.",
+    "metric_note": "Compare retention rates between low-end and high-end device cohorts.",
     "source": "AI-suggested"
   },
   "crashes_bugs|software-engineer": {
-    "experiment": "Implement automatic crash recovery for stuck match states to prevent forced app restarts.",
+    "experiment": "Implement automatic crash recovery logic to restore match state without forcing a full app restart.",
     "metric": "crash-free sessions %",
     "metric_note": "Higher percentage indicates fewer users experiencing app crashes.",
     "source": "AI-suggested"
   },
   "crashes_bugs|product-analyst": {
-    "experiment": "Implement a crash recovery mechanism that restores player state after app termination to prevent match loss.",
+    "experiment": "Implement a crash recovery mechanism to restore match state after app termination.",
     "metric": "D1, D7 and D30 retention by cohort",
     "metric_note": "Compare retention rates between users experiencing crashes and those who do not.",
     "source": "AI-suggested"
   },
   "pay_to_win|game-developer": {
-    "experiment": "Cap the stat boost from premium skins to 5% and monitor high-spenders' win rates against low-spenders.",
+    "experiment": "Cap cosmetic item stat bonuses to zero and monitor player spending behavior changes.",
     "metric": "win rate by squad rating band",
-    "metric_note": "Check if high-spenders' win rates align with their skill-based rating bands.",
+    "metric_note": "Check if high-spenders' win rates align with skill-based bands.",
     "source": "AI-suggested"
   },
   "pay_to_win|product-analyst": {
-    "experiment": "Test removing direct stat boosts from premium skins to neutralize perceived pay-to-win advantages in competitive modes",
-    "metric": "D1, D7 and D30 retention by cohort",
-    "metric_note": "Monitor retention drop among high-spending users post-change to assess sentiment impact.",
+    "experiment": "Cap cosmetic stat boosts to prevent pay-to-win perception while maintaining revenue streams.",
+    "metric": "churn by segment",
+    "metric_note": "Monitor high-spender churn to detect pay-to-win backlash.",
     "source": "AI-suggested"
   },
   "pay_to_win|founders-office": {
-    "experiment": "Introduce a visible 'Fair Play' badge for non-paying players to counter pay-to-win narratives in community forums.",
+    "experiment": "Implement a visible 'Fair Play' badge for non-spending players to reduce perceived pay-to-win bias.",
     "metric": "store rating",
-    "metric_note": "Monitor average rating changes specifically in reviews mentioning fairness or spending.",
+    "metric_note": "Monitor average rating changes specifically within the 'Fairness' category post-launch.",
     "source": "AI-suggested"
   },
   "matchmaking_balance|data-analyst": {
-    "experiment": "Test if flagging high-skill opponents in lobby reduces player churn and improves perceived fairness ratings.",
+    "experiment": "Test if flagging high-skill mismatches reduces player churn in the next 7 days.",
     "metric": "retention by device tier",
-    "metric_note": "Monitor if fairness changes improve retention across different hardware performance levels.",
+    "metric_note": "Compare retention rates between flagged and unflagged user cohorts.",
     "source": "AI-suggested"
   },
   "matchmaking_balance|game-developer": {
-    "experiment": "Implement a stricter rating cap for matchmaking to reduce variance in opponent skill levels during ranked matches.",
+    "experiment": "Cap the maximum rating difference between matched squads to reduce perceived unfairness in early game stages.",
     "metric": "rating gap between opponents",
-    "metric_note": "Lower average gap indicates better balance and fairness in match pairings.",
+    "metric_note": "Lower average gap indicates better balance; monitor for unintended win rate shifts.",
     "source": "AI-suggested"
   },
   "pricing_and_shop|ui-ux-designer": {
-    "experiment": "Add a mandatory 3-second countdown and explicit currency conversion display to the purchase confirmation modal.",
+    "experiment": "Implement a mandatory 3-second countdown with explicit price display before finalizing in-app purchases.",
     "metric": "purchase confirmation abandonment",
-    "metric_note": "Higher abandonment indicates reduced accidental purchases and improved user confidence.",
+    "metric_note": "Monitor abandonment rate to balance accidental purchase reduction against legitimate sales.",
     "source": "AI-suggested"
   },
   "pricing_and_shop|product-associate": {
@@ -120,111 +120,111 @@
     "source": "AI-suggested"
   },
   "ads_notifications|growth-analyst": {
-    "experiment": "Reduce push notification frequency by 50% to test impact on user retention and engagement levels.",
+    "experiment": "Reduce push notification frequency by 50% for users receiving more than three daily alerts.",
     "metric": "push opt-out rate",
-    "metric_note": "Lower rate indicates better notification tolerance and reduced user churn.",
+    "metric_note": "Lower rate indicates reduced annoyance and improved user retention.",
     "source": "AI-suggested"
   },
   "ads_notifications|marketing-associate": {
-    "experiment": "Reduce push notification frequency by 50% for users who disabled notifications to measure retention impact.",
+    "experiment": "Reduce interstitial ad frequency by 50% for users with high session duration to test retention impact.",
     "metric": "store rating trend",
-    "metric_note": "Monitor for positive shift in average rating after frequency reduction.",
+    "metric_note": "Monitor for positive shift in average rating following the frequency reduction.",
     "source": "AI-suggested"
   },
   "ads_notifications|product-associate": {
-    "experiment": "Reduce interstitial ad frequency from every 3 minutes to every 10 minutes for a 14-day A/B test.",
+    "experiment": "Reduce interstitial ad frequency by 50% for users with high session duration to test retention impact.",
     "metric": "support tickets per 1,000 daily users",
-    "metric_note": "Lower values indicate fewer user complaints about ad interruptions.",
+    "metric_note": "Lower values indicate fewer ad-related crashes or user complaints.",
     "source": "AI-suggested"
   },
   "support_refunds|founders-office": {
-    "experiment": "Implement automated ticket routing to prioritize refund requests over general inquiries.",
+    "experiment": "Implement automated ticket triage to route refund requests to specialized agents within 15 minutes.",
     "metric": "first response time",
-    "metric_note": "Measure median time from ticket creation to first agent reply.",
+    "metric_note": "Measure average minutes from ticket creation to first human agent reply.",
     "source": "AI-suggested"
   },
   "support_refunds|product-associate": {
-    "experiment": "Implement automated refund processing for verified payment failures to reduce manual support queue backlog.",
+    "experiment": "Implement automated refund processing for verified payment failures to reduce manual queue backlog and response time.",
     "metric": "support tickets per 1,000 daily users",
-    "metric_note": "Lower values indicate reduced support burden and improved self-service resolution.",
+    "metric_note": "Lower values indicate reduced support burden and improved self-service resolution rates.",
     "source": "AI-suggested"
   },
   "support_refunds|data-analyst": {
-    "experiment": "Implement automated refund processing for verified chargebacks to reduce manual queue backlog and response time.",
+    "experiment": "Implement automated refund processing for verified purchase failures to reduce manual support queue backlog.",
     "metric": "refund rate by cause",
-    "metric_note": "Monitor decrease in 'ignored request' category to validate automation effectiveness.",
+    "metric_note": "Track percentage of refunds attributed to specific failure types over time.",
     "source": "AI-suggested"
   },
   "localisation|marketing-associate": {
-    "experiment": "Launch a targeted campaign promoting newly added Hindi and Tamil language support to regional user segments.",
+    "experiment": "Add Hindi and Tamil language support to the main menu and settings to test regional adoption.",
     "metric": "installs by language or campaign",
-    "metric_note": "Track new installs specifically attributed to the regional language promotion campaign.",
+    "metric_note": "Track new user acquisition specifically segmented by selected interface language.",
     "source": "AI-suggested"
   },
   "localisation|product-associate": {
-    "experiment": "Launch Hindi and Tamil localisation for core UI and track user engagement changes over 30 days.",
-    "metric": "feature adoption rate",
-    "metric_note": "Compare adoption rates between localised and non-localised user cohorts.",
+    "experiment": "Launch Hindi and Tamil UI translations for new users to measure impact on support ticket volume.",
+    "metric": "support tickets per 1,000 daily users",
+    "metric_note": "Lower values indicate reduced confusion and improved regional accessibility.",
     "source": "AI-suggested"
   },
   "social_features|product-associate": {
-    "experiment": "Simplify the direct match invite flow by reducing required clicks from three to one.",
+    "experiment": "Simplify the direct match invite flow by reducing required clicks to initiate a private game session.",
     "metric": "feature adoption rate",
-    "metric_note": "Measure the percentage of users successfully sending at least one invite.",
+    "metric_note": "Measure percentage of users successfully sending at least one direct invite.",
     "source": "AI-suggested"
   },
   "social_features|growth-analyst": {
-    "experiment": "Test a new in-game prompt inviting players to share their clan link via social media after winning a match.",
+    "experiment": "Test a one-click invite button in the friends list to reduce friction for direct match requests.",
     "metric": "K-factor",
-    "metric_note": "Measure viral coefficient to assess if social sharing drives new organic installs.",
+    "metric_note": "Measure viral coefficient to assess if social invites drive net new user growth.",
     "source": "AI-suggested"
   },
   "social_features|marketing-associate": {
-    "experiment": "Test adding a 'Invite Friends' button directly in the post-match summary screen to boost social sharing.",
+    "experiment": "Test a new in-game prompt inviting players to share their clan tag to recruit new members.",
     "metric": "share rate",
-    "metric_note": "Measure the percentage of users who share the match summary link.",
+    "metric_note": "Measure the percentage of users who successfully share the clan tag.",
     "source": "AI-suggested"
   },
   "release_quality|software-engineer": {
     "experiment": "Implement automated regression testing for critical user flows before every minor version release to catch bugs early.",
     "metric": "error rate per release",
-    "metric_note": "Lower values indicate fewer bugs introduced by the specific update.",
+    "metric_note": "Track average error frequency per release to identify regression trends.",
     "source": "AI-suggested"
   },
   "release_quality|founders-office": {
-    "experiment": "Implement automated regression testing for critical paths before every patch release to catch bugs early.",
+    "experiment": "Implement automated regression testing for critical paths before every minor update release to catch bugs early.",
     "metric": "repeat-complaint rate",
     "metric_note": "Lower rate indicates fewer recurring issues post-update.",
     "source": "AI-suggested"
   },
   "progression_grind|game-developer": {
-    "experiment": "Increase upgrade card drop rate by 20% for players below rating band 5000 to accelerate early progression.",
-    "metric": "win rate by squad rating band",
-    "metric_note": "Monitor if win rates stabilize or improve in lower rating bands post-change.",
+    "experiment": "Increase upgrade card drop rate by 20% for players with low recent progression to reduce grind fatigue.",
+    "metric": "economy sink/source ratio",
+    "metric_note": "Monitor if increased sources balance sinks without inflating overall economy.",
     "source": "AI-suggested"
   },
   "progression_grind|product-analyst": {
-    "experiment": "Reduce upgrade cooldowns by 20% for players in the bottom 50% of progression speed.",
+    "experiment": "Increase daily upgrade card drop rate by 20% for players with low progression velocity.",
     "metric": "D1, D7 and D30 retention by cohort",
-    "metric_note": "Compare retention lift between treatment and control cohorts.",
+    "metric_note": "Compare retention lift in treatment vs control cohorts.",
     "source": "AI-suggested"
   },
   "account_data_loss|software-engineer": {
     "experiment": "Implement automatic cloud save synchronization for guest accounts to prevent data loss upon device reset.",
     "metric": "error rate per release",
-    "metric_note": "Track reduction in sync failure errors post-deployment.",
+    "metric_note": "Monitor for spikes in save-related errors post-deployment.",
     "source": "AI-suggested"
   },
   "account_data_loss|founders-office": {
-    "experiment": "Implement automated guest account migration to Google Play upon first login to prevent data loss.",
+    "experiment": "Implement automated guest account migration prompts to prevent data loss during login failures.",
     "metric": "repeat-complaint rate",
-    "metric_note": "Measure percentage of users filing multiple tickets for the same data loss issue.",
+    "metric_note": "Lower rate indicates successful resolution of persistent account data loss issues.",
     "source": "AI-suggested"
   },
   "other|product-analyst": {
-    "experiment": "Test a new onboarding tip sequence for players who stall at the first boss encounter.",
+    "experiment": "Add a contextual tooltip to the inventory screen explaining item rarity to reduce confusion.",
     "metric": "tutorial completion rate",
-    "metric_note": "Measure percentage of users finishing the tutorial successfully.",
+    "metric_note": "Measure percentage of users finishing the tutorial after the UI change.",
     "source": "AI-suggested"
   }
 }

@@ -13,22 +13,22 @@
 - **Volume & Share**: 205 reviews (28% of actionable complaints).
 - **Owning Team**: data-analyst (co-owners: game-developer).
 - **Player Evidence**: “matchmaking and rng seem to heavily favour certain player locations” (*Player 3140*).
-- **AI-Suggested Experiment**: Test if flagging high-skill opponents in lobby reduces player churn and improves perceived fairness ratings.
-- **Primary Metric to Watch**: **retention by device tier** (Monitor if fairness changes improve retention across different hardware performance levels.).
+- **AI-Suggested Experiment**: Test if flagging high-skill mismatches reduces player churn in the next 7 days.
+- **Primary Metric to Watch**: **retention by device tier** (Compare retention rates between flagged and unflagged user cohorts.).
 
 #### 2. Pay To Win Sentiment (Priority Score: 60/100 · Confidence: Medium)
 - **Volume & Share**: 95 reviews (13% of actionable complaints).
 - **Owning Team**: game-developer (co-owners: product-analyst, founders-office).
 - **Player Evidence**: “this game is just like a pay to win game” (*Player 6401*).
-- **AI-Suggested Experiment**: Cap the stat boost from premium skins to 5% and monitor high-spenders' win rates against low-spenders.
-- **Primary Metric to Watch**: **win rate by squad rating band** (Check if high-spenders' win rates align with their skill-based rating bands.).
+- **AI-Suggested Experiment**: Cap cosmetic item stat bonuses to zero and monitor player spending behavior changes.
+- **Primary Metric to Watch**: **win rate by squad rating band** (Check if high-spenders' win rates align with skill-based bands.).
 
 #### 3. Ads & Notifications (Priority Score: 34/100 · Confidence: Medium)
 - **Volume & Share**: 74 reviews (10% of actionable complaints).
 - **Owning Team**: growth-analyst (co-owners: marketing-associate, product-associate).
 - **Player Evidence**: “No forced ads” (*Player 8693*).
-- **AI-Suggested Experiment**: Reduce push notification frequency by 50% to test impact on user retention and engagement levels.
-- **Primary Metric to Watch**: **push opt-out rate** (Lower rate indicates better notification tolerance and reduced user churn.).
+- **AI-Suggested Experiment**: Reduce push notification frequency by 50% for users receiving more than three daily alerts.
+- **Primary Metric to Watch**: **push opt-out rate** (Lower rate indicates reduced annoyance and improved user retention.).
 
 ---
 
