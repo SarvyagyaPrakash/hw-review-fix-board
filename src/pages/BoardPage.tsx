@@ -255,7 +255,7 @@ export const BoardPage: React.FC = () => {
       </div>
 
       {/* 2. Filter Bar */}
-      <div className="p-4 rounded-2xl bg-paper/80 dark:bg-[#232625]/85 border border-hairline/80 dark:border-white/10 backdrop-blur-md space-y-3 shadow-xs">
+      <div className="relative z-30 p-4 rounded-2xl bg-paper/85 dark:bg-[#232625]/90 border border-hairline/80 dark:border-white/10 backdrop-blur-md space-y-3 shadow-xs">
         <div className="flex flex-wrap items-center gap-3">
           {/* Text Search */}
           <div className="relative flex-1 min-w-[220px]">
@@ -293,7 +293,7 @@ export const BoardPage: React.FC = () => {
         </div>
 
         {/* Dropdown Filters Row */}
-        <div className="flex flex-wrap items-center gap-2 pt-2.5 border-t border-hairline/40 text-xs">
+        <div className="relative z-30 flex flex-wrap items-center gap-2 pt-2.5 border-t border-hairline/40 text-xs">
           <div className="flex items-center gap-1.5 text-muted font-medium mr-1">
             <Filter className="w-3.5 h-3.5" />
             <span>Filters:</span>

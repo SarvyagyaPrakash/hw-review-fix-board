@@ -35,9 +35,23 @@ export const SelectMenu: React.FC<SelectMenuProps> = ({
   size = 'md',
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [openUpward, setOpenUpward] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const selectedOption = options.find((opt) => opt.value === value);
+
+  // Position flip: check if space below is limited
+  useEffect(() => {
+    if (isOpen && containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      const spaceBelow = window.innerHeight - rect.bottom;
+      if (spaceBelow < 280 && rect.top > 280) {
+        setOpenUpward(true);
+      } else {
+        setOpenUpward(false);
+      }
+    }
+  }, [isOpen]);
 
   // Close when clicking outside
   useEffect(() => {
@@ -68,7 +82,10 @@ export const SelectMenu: React.FC<SelectMenuProps> = ({
   const heightClass = size === 'sm' ? 'h-8 px-2.5 text-xs' : 'h-9 px-3 text-xs sm:text-xs font-semibold';
 
   return (
-    <div ref={containerRef} className="relative inline-block text-left">
+    <div
+      ref={containerRef}
+      className={`relative inline-block text-left transition-all ${isOpen ? 'z-50' : 'z-auto'}`}
+    >
       {/* Trigger Button: iOS frosted capsule matching website bg */}
       <button
         type="button"
@@ -106,9 +123,9 @@ export const SelectMenu: React.FC<SelectMenuProps> = ({
         <div
           role="listbox"
           aria-label={ariaLabel}
-          className={`absolute z-50 mt-1.5 min-w-[180px] max-w-[280px] rounded-2xl border border-hairline/80 dark:border-white/15 bg-paper/95 dark:bg-[#1c1e1d]/95 backdrop-blur-2xl shadow-2xl p-1.5 space-y-0.5 outline-none transition-all duration-150 transform origin-top max-h-72 overflow-y-auto ${
-            align === 'right' ? 'right-0' : 'left-0'
-          } ${menuClassName}`}
+          className={`absolute z-50 min-w-[220px] max-w-[320px] rounded-2xl border border-hairline/80 dark:border-white/20 bg-paper/95 dark:bg-[#1c1e1d]/98 backdrop-blur-2xl shadow-2xl ring-1 ring-black/10 dark:ring-white/15 p-1.5 space-y-0.5 outline-none transition-all duration-150 max-h-72 overflow-y-auto ${
+            openUpward ? 'bottom-full mb-1.5 origin-bottom' : 'top-full mt-1.5 origin-top'
+          } ${align === 'right' ? 'right-0' : 'left-0'} ${menuClassName}`}
         >
           {options.map((opt) => {
             const isSelected = opt.value === value;

@@ -159,7 +159,7 @@ export const ExplorerPage: React.FC = () => {
       </div>
 
       {/* Filter Row */}
-      <div className="p-4 rounded-2xl bg-paper/80 dark:bg-[#232625]/85 border border-hairline/80 dark:border-white/10 backdrop-blur-md flex flex-wrap items-center gap-3 shadow-xs">
+      <div className="relative z-30 p-4 rounded-2xl bg-paper/85 dark:bg-[#232625]/90 border border-hairline/80 dark:border-white/10 backdrop-blur-md flex flex-wrap items-center gap-3 shadow-xs">
         {/* Search */}
         <div className="relative flex-1 min-w-[200px]">
           <Search className="w-3.5 h-3.5 text-muted absolute left-3 top-1/2 -translate-y-1/2" />
