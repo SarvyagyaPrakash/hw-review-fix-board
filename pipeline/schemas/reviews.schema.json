@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HWReviewsData",
+  "type": "object",
+  "required": ["meta", "reviews"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": [
+        "app_id", "collected_at", "store", "country", "language",
+        "stars_included", "reviews_collected", "reviews_after_cleaning",
+        "reviews_actionable", "date_range", "taxonomy_version",
+        "prompt_version", "model"
+      ],
+      "properties": {
+        "app_id": { "type": "string" },
+        "collected_at": { "type": "string" },
+        "store": { "type": "string" },
+        "country": { "type": "string" },
+        "language": { "type": "string" },
+        "stars_included": { "type": "array", "items": { "type": "integer" } },
+        "reviews_collected": { "type": "integer" },
+        "reviews_after_cleaning": { "type": "integer" },
+        "reviews_actionable": { "type": "integer" },
+        "date_range": { "type": "array", "items": { "type": "string" } },
+        "taxonomy_version": { "type": "string" },
+        "prompt_version": { "type": "string" },
+        "model": { "type": "string" }
+      }
+    },
+    "reviews": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id", "alias", "stars", "date", "thumbs", "text", "actionable", "issues", "teams"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "alias": { "type": "string" },
+          "stars": { "type": "integer", "minimum": 1, "maximum": 5 },
+          "date": { "type": ["string", "null"] },
+          "version": { "type": ["string", "null"] },
+          "thumbs": { "type": "integer" },
+          "text": { "type": "string" },
+          "actionable": { "type": "boolean" },
+          "dev_reply": {
+            "type": ["object", "null"],
+            "properties": {
+              "text": { "type": ["string", "null"] },
+              "date": { "type": ["string", "null"] }
+            }
+          },
+          "issues": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["theme", "problem", "evidence", "severity", "confidence"],
+              "properties": {
+                "theme": { "type": "string" },
+                "problem": { "type": "string", "maxLength": 120 },
+                "evidence": { "type": "string", "maxLength": 200 },
+                "severity": { "type": "integer", "minimum": 1, "maximum": 3 },
+                "confidence": { "type": "number", "minimum": 0.0, "maximum": 1.0 }
+              }
+            }
+          },
+          "teams": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["team", "themes"],
+              "properties": {
+                "team": { "type": "string" },
+                "themes": { "type": "array", "items": { "type": "string" } }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

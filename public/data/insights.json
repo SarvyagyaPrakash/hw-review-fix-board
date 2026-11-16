@@ -1,0 +1,381 @@
+{
+  "generated_at": "2026-11-16T15:19:28.293751+00:00",
+  "total_reviews": 2286,
+  "actionable_reviews": 728,
+  "priority_rankings": [
+    {
+      "theme": "matchmaking_balance",
+      "name": "Matchmaking Balance",
+      "volume_count": 205,
+      "volume_share": 0.2816,
+      "severity_norm": 0.6878,
+      "recency_factor": 1.4528,
+      "engagement_factor": 1.0939,
+      "raw_score": 0.307783,
+      "confidence": "High",
+      "agreement_f1": 0.82,
+      "primary_team": "data-analyst",
+      "teams": [
+        "data-analyst",
+        "game-developer"
+      ],
+      "priority_score": 100
+    },
+    {
+      "theme": "pay_to_win",
+      "name": "Pay To Win Sentiment",
+      "volume_count": 95,
+      "volume_share": 0.1305,
+      "severity_norm": 1.0,
+      "recency_factor": 1.3236,
+      "engagement_factor": 1.0676,
+      "raw_score": 0.184403,
+      "confidence": "Medium",
+      "agreement_f1": 0.82,
+      "primary_team": "game-developer",
+      "teams": [
+        "game-developer",
+        "product-analyst",
+        "founders-office"
+      ],
+      "priority_score": 60
+    },
+    {
+      "theme": "ads_notifications",
+      "name": "Ads & Notifications",
+      "volume_count": 74,
+      "volume_share": 0.1016,
+      "severity_norm": 0.6802,
+      "recency_factor": 1.431,
+      "engagement_factor": 1.0709,
+      "raw_score": 0.105946,
+      "confidence": "Medium",
+      "agreement_f1": 0.82,
+      "primary_team": "growth-analyst",
+      "teams": [
+        "growth-analyst",
+        "marketing-associate",
+        "product-associate"
+      ],
+      "priority_score": 34
+    },
+    {
+      "theme": "crashes_bugs",
+      "name": "Crashes & Bugs",
+      "volume_count": 114,
+      "volume_share": 0.1566,
+      "severity_norm": 1.0,
+      "recency_factor": 0.5,
+      "engagement_factor": 1.0677,
+      "raw_score": 0.0836,
+      "confidence": "High",
+      "agreement_f1": 0.82,
+      "primary_team": "software-engineer",
+      "teams": [
+        "software-engineer",
+        "product-analyst"
+      ],
+      "priority_score": 27
+    },
+    {
+      "theme": "release_quality",
+      "name": "Release & Update Quality",
+      "volume_count": 83,
+      "volume_share": 0.114,
+      "severity_norm": 0.6827,
+      "recency_factor": 0.9967,
+      "engagement_factor": 1.056,
+      "raw_score": 0.08193,
+      "confidence": "Medium",
+      "agreement_f1": 0.82,
+      "primary_team": "software-engineer",
+      "teams": [
+        "software-engineer",
+        "founders-office"
+      ],
+      "priority_score": 27
+    },
+    {
+      "theme": "lag_performance",
+      "name": "Lag & Performance",
+      "volume_count": 122,
+      "volume_share": 0.1676,
+      "severity_norm": 0.6721,
+      "recency_factor": 0.5696,
+      "engagement_factor": 1.0535,
+      "raw_score": 0.067592,
+      "confidence": "High",
+      "agreement_f1": 0.82,
+      "primary_team": "software-engineer",
+      "teams": [
+        "software-engineer",
+        "data-analyst"
+      ],
+      "priority_score": 22
+    },
+    {
+      "theme": "support_refunds",
+      "name": "Support & Refunds",
+      "volume_count": 29,
+      "volume_share": 0.0398,
+      "severity_norm": 1.0,
+      "recency_factor": 1.1411,
+      "engagement_factor": 1.0994,
+      "raw_score": 0.049973,
+      "confidence": "Low",
+      "agreement_f1": 0.68,
+      "primary_team": "founders-office",
+      "teams": [
+        "founders-office",
+        "product-associate",
+        "data-analyst"
+      ],
+      "priority_score": 16
+    },
+    {
+      "theme": "pricing_and_shop",
+      "name": "Pricing & Shop UX",
+      "volume_count": 35,
+      "volume_share": 0.0481,
+      "severity_norm": 0.6857,
+      "recency_factor": 0.7564,
+      "engagement_factor": 1.0864,
+      "raw_score": 0.02709,
+      "confidence": "Low",
+      "agreement_f1": 0.68,
+      "primary_team": "ui-ux-designer",
+      "teams": [
+        "ui-ux-designer",
+        "product-associate",
+        "data-analyst"
+      ],
+      "priority_score": 9
+    },
+    {
+      "theme": "auction_issues",
+      "name": "Auction Mechanics",
+      "volume_count": 45,
+      "volume_share": 0.0618,
+      "severity_norm": 0.6815,
+      "recency_factor": 0.5,
+      "engagement_factor": 1.089,
+      "raw_score": 0.022938,
+      "confidence": "Medium",
+      "agreement_f1": 0.82,
+      "primary_team": "game-developer",
+      "teams": [
+        "game-developer",
+        "ui-ux-designer",
+        "product-associate"
+      ],
+      "priority_score": 7
+    },
+    {
+      "theme": "social_features",
+      "name": "Social & Multiplayer",
+      "volume_count": 18,
+      "volume_share": 0.0247,
+      "severity_norm": 0.6667,
+      "recency_factor": 1.103,
+      "engagement_factor": 1.0903,
+      "raw_score": 0.019824,
+      "confidence": "Low",
+      "agreement_f1": 0.68,
+      "primary_team": "product-associate",
+      "teams": [
+        "product-associate",
+        "growth-analyst",
+        "marketing-associate"
+      ],
+      "priority_score": 6
+    },
+    {
+      "theme": "localisation",
+      "name": "Localisation & Regional",
+      "volume_count": 8,
+      "volume_share": 0.011,
+      "severity_norm": 0.3333,
+      "recency_factor": 1.5,
+      "engagement_factor": 1.022,
+      "raw_score": 0.005615,
+      "confidence": "Low",
+      "agreement_f1": 0.68,
+      "primary_team": "marketing-associate",
+      "teams": [
+        "marketing-associate",
+        "product-associate"
+      ],
+      "priority_score": 2
+    },
+    {
+      "theme": "progression_grind",
+      "name": "Progression & Grind",
+      "volume_count": 11,
+      "volume_share": 0.0151,
+      "severity_norm": 0.6667,
+      "recency_factor": 0.6017,
+      "engagement_factor": 1.1443,
+      "raw_score": 0.006935,
+      "confidence": "Low",
+      "agreement_f1": 0.68,
+      "primary_team": "game-developer",
+      "teams": [
+        "game-developer",
+        "product-analyst"
+      ],
+      "priority_score": 2
+    },
+    {
+      "theme": "onboarding_confusion",
+      "name": "Onboarding Confusion",
+      "volume_count": 3,
+      "volume_share": 0.0041,
+      "severity_norm": 0.3333,
+      "recency_factor": 1.103,
+      "engagement_factor": 1.0532,
+      "raw_score": 0.001596,
+      "confidence": "Low",
+      "agreement_f1": 0.68,
+      "primary_team": "product-analyst",
+      "teams": [
+        "product-analyst",
+        "ui-ux-designer",
+        "product-associate"
+      ],
+      "priority_score": 1
+    },
+    {
+      "theme": "tutorial_length",
+      "name": "Tutorial Length & Flow",
+      "volume_count": 3,
+      "volume_share": 0.0041,
+      "severity_norm": 0.7778,
+      "recency_factor": 1.103,
+      "engagement_factor": 1.0596,
+      "raw_score": 0.003746,
+      "confidence": "Low",
+      "agreement_f1": 0.68,
+      "primary_team": "product-associate",
+      "teams": [
+        "product-associate",
+        "growth-analyst"
+      ],
+      "priority_score": 1
+    },
+    {
+      "theme": "account_data_loss",
+      "name": "Account & Data Loss",
+      "volume_count": 1,
+      "volume_share": 0.0014,
+      "severity_norm": 1.0,
+      "recency_factor": 1.5,
+      "engagement_factor": 1.0,
+      "raw_score": 0.00206,
+      "confidence": "Low",
+      "agreement_f1": 0.68,
+      "primary_team": "software-engineer",
+      "teams": [
+        "software-engineer",
+        "founders-office"
+      ],
+      "priority_score": 1
+    },
+    {
+      "theme": "other",
+      "name": "Other Actionable Feedback",
+      "volume_count": 0,
+      "volume_share": 0.0,
+      "severity_norm": 0.3333,
+      "recency_factor": 0.5,
+      "engagement_factor": 1.0,
+      "raw_score": 0.0,
+      "confidence": "Low",
+      "agreement_f1": 0.68,
+      "primary_team": "product-analyst",
+      "teams": [
+        "product-analyst"
+      ],
+      "priority_score": 0
+    }
+  ],
+  "theme_distribution": {
+    "onboarding_confusion": 3,
+    "tutorial_length": 3,
+    "auction_issues": 45,
+    "lag_performance": 122,
+    "crashes_bugs": 114,
+    "pay_to_win": 95,
+    "matchmaking_balance": 205,
+    "pricing_and_shop": 35,
+    "ads_notifications": 74,
+    "support_refunds": 29,
+    "localisation": 8,
+    "social_features": 18,
+    "release_quality": 83,
+    "progression_grind": 11,
+    "account_data_loss": 1,
+    "other": 0
+  },
+  "severity_mix": {
+    "1": 11,
+    "2": 569,
+    "3": 266
+  },
+  "star_distribution": {
+    "1": 869,
+    "2": 810,
+    "3": 607
+  },
+  "version_trends": {
+    "12.33.0": {
+      "support_refunds": 3,
+      "ads_notifications": 4,
+      "pay_to_win": 4,
+      "pricing_and_shop": 3,
+      "release_quality": 2,
+      "localisation": 1,
+      "matchmaking_balance": 4,
+      "crashes_bugs": 2,
+      "onboarding_confusion": 1,
+      "lag_performance": 1
+    },
+    "12.21.0": {
+      "ads_notifications": 1,
+      "matchmaking_balance": 7,
+      "lag_performance": 4,
+      "release_quality": 1,
+      "auction_issues": 1
+    },
+    "12.31.0": {
+      "support_refunds": 2,
+      "ads_notifications": 3,
+      "pay_to_win": 1,
+      "matchmaking_balance": 2,
+      "release_quality": 6,
+      "lag_performance": 1
+    },
+    "12.41.1": {
+      "matchmaking_balance": 11,
+      "pricing_and_shop": 1,
+      "pay_to_win": 1,
+      "account_data_loss": 1,
+      "auction_issues": 1,
+      "lag_performance": 1,
+      "progression_grind": 1
+    },
+    "12.29.0": {
+      "support_refunds": 1,
+      "crashes_bugs": 2,
+      "matchmaking_balance": 5,
+      "release_quality": 2,
+      "ads_notifications": 1,
+      "pricing_and_shop": 1,
+      "localisation": 1
+    }
+  },
+  "weekly_trends": {},
+  "reply_stats": {
+    "available": false,
+    "note": "Developer replies were not present or recorded on the majority of collected public reviews."
+  }
+}

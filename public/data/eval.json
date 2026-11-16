@@ -1,0 +1,237 @@
+{
+  "evaluation_type": "agreement with independent AI labels",
+  "sample_size": 150,
+  "dev_split": 75,
+  "test_split": 75,
+  "dev": {
+    "macro_f1": 0.409,
+    "cohens_kappa": 0.697,
+    "overall_agreement": 0.88,
+    "per_theme": {
+      "onboarding_confusion": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 0
+      },
+      "tutorial_length": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 0
+      },
+      "auction_issues": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 0
+      },
+      "lag_performance": {
+        "precision": 1.0,
+        "recall": 0.333,
+        "f1": 0.5,
+        "support": 3
+      },
+      "crashes_bugs": {
+        "precision": 1.0,
+        "recall": 0.333,
+        "f1": 0.5,
+        "support": 3
+      },
+      "pay_to_win": {
+        "precision": 1.0,
+        "recall": 0.75,
+        "f1": 0.857,
+        "support": 4
+      },
+      "matchmaking_balance": {
+        "precision": 0.6,
+        "recall": 1.0,
+        "f1": 0.75,
+        "support": 3
+      },
+      "pricing_and_shop": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 0
+      },
+      "ads_notifications": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 2
+      },
+      "support_refunds": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 0
+      },
+      "localisation": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 0
+      },
+      "social_features": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 1
+      },
+      "release_quality": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 1
+      },
+      "progression_grind": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 3
+      },
+      "account_data_loss": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 0
+      },
+      "other": {
+        "precision": 0.885,
+        "recall": 0.982,
+        "f1": 0.931,
+        "support": 55
+      }
+    }
+  },
+  "test": {
+    "macro_f1": 0.515,
+    "cohens_kappa": 0.795,
+    "overall_agreement": 0.88,
+    "per_theme": {
+      "onboarding_confusion": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 0
+      },
+      "tutorial_length": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 0
+      },
+      "auction_issues": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 2
+      },
+      "lag_performance": {
+        "precision": 0.5,
+        "recall": 0.25,
+        "f1": 0.333,
+        "support": 4
+      },
+      "crashes_bugs": {
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1": 0.667,
+        "support": 2
+      },
+      "pay_to_win": {
+        "precision": 1.0,
+        "recall": 0.25,
+        "f1": 0.4,
+        "support": 4
+      },
+      "matchmaking_balance": {
+        "precision": 0.818,
+        "recall": 1.0,
+        "f1": 0.9,
+        "support": 9
+      },
+      "pricing_and_shop": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 2
+      },
+      "ads_notifications": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 3
+      },
+      "support_refunds": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 2
+      },
+      "localisation": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 0
+      },
+      "social_features": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 0
+      },
+      "release_quality": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 1
+      },
+      "progression_grind": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 2
+      },
+      "account_data_loss": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 0
+      },
+      "other": {
+        "precision": 0.88,
+        "recall": 1.0,
+        "f1": 0.936,
+        "support": 44
+      }
+    }
+  },
+  "evidence_validity_pct": 100.0,
+  "actionable_flag_agreement_pct": 94.6,
+  "top_confusions": [
+    {
+      "from": "lag_performance",
+      "to": "crashes_bugs",
+      "count": 3
+    },
+    {
+      "from": "pay_to_win",
+      "to": "progression_grind",
+      "count": 2
+    },
+    {
+      "from": "pricing_and_shop",
+      "to": "support_refunds",
+      "count": 2
+    },
+    {
+      "from": "tutorial_length",
+      "to": "onboarding_confusion",
+      "count": 2
+    }
+  ],
+  "limitations": "This evaluation measures agreement between independent AI labelling passes with distinct prompt structures. It does not replace ground-truth human verification, but bounds systematic ambiguity."
+}

@@ -1,0 +1,10 @@
+{
+  "reviews_processed": 2286,
+  "actionable_reviews": 728,
+  "actionable_share_pct": 31.85,
+  "total_issues": 846,
+  "model": "qwen/qwen3.8-27b",
+  "prompt_version": "p1",
+  "evidence_integrity_pct": 100.0,
+  "elapsed_seconds": 0.08
+}

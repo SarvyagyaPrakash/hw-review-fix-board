@@ -1,0 +1,87 @@
+@import '@fontsource-variable/bricolage-grotesque';
+@import '@fontsource-variable/figtree';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --canvas: #E4E1DB;
+  --paper: #FFFFFF;
+  --glass: rgba(255, 255, 255, 0.70);
+  --ink: #2B2A28;
+  --muted: #6B665E;
+  --hairline: #D2CEC5;
+}
+
+html.dark {
+  --canvas: #1A1B1A;
+  --paper: #232625;
+  --glass: rgba(30, 32, 31, 0.72);
+  --ink: #ECEAE5;
+  --muted: #A39F96;
+  --hairline: #3A3C39;
+}
+
+body {
+  font-family: 'Figtree Variable', sans-serif;
+  color: var(--ink);
+  background-color: var(--canvas);
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Seamless Marbled Swirl Background Tile (Applied via fixed pseudo-element for iOS compatibility) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url('/bg/swirl-light.webp');
+  background-size: 800px;
+  background-repeat: repeat;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+html.dark body::before {
+  background-image: url('/bg/swirl-dark.webp');
+  opacity: 0.90;
+}
+
+/* Diagonal stripes for 'Working' status */
+.progress-striped {
+  background-size: 16px 16px;
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.25) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.25) 50%,
+    rgba(255, 255, 255, 0.25) 75%,
+    transparent 75%,
+    transparent
+  );
+}
+
+/* Accessible focus ring */
+*:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+/* Print Stylesheet for A4 Single-Page Fix First summary */
+@media print {
+  body::before, nav, aside, header, footer, .no-print {
+    display: none !important;
+  }
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .print-page {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}

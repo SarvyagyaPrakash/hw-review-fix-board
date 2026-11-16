@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HWInsightsData",
+  "type": "object",
+  "required": [
+    "generated_at",
+    "total_reviews",
+    "actionable_reviews",
+    "priority_rankings",
+    "theme_distribution",
+    "severity_mix",
+    "star_distribution",
+    "version_trends",
+    "weekly_trends"
+  ],
+  "properties": {
+    "generated_at": { "type": "string" },
+    "total_reviews": { "type": "integer" },
+    "actionable_reviews": { "type": "integer" },
+    "priority_rankings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "theme", "name", "priority_score", "volume_count", "volume_share",
+          "severity_norm", "recency_factor", "engagement_factor", "raw_score",
+          "confidence", "agreement_f1", "primary_team", "teams"
+        ]
+      }
+    },
+    "theme_distribution": { "type": "object" },
+    "severity_mix": { "type": "object" },
+    "star_distribution": { "type": "object" },
+    "version_trends": { "type": "object" },
+    "weekly_trends": { "type": "object" }
+  }
+}

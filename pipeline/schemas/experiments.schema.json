@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HWExperimentsData",
+  "type": "object",
+  "additionalProperties": {
+    "type": "object",
+    "required": ["experiment", "metric", "metric_note", "source"],
+    "properties": {
+      "experiment": { "type": "string" },
+      "metric": { "type": "string" },
+      "metric_note": { "type": "string" },
+      "source": { "type": "string" }
+    }
+  }
+}
