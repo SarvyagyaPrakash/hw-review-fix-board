@@ -90,7 +90,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenActivity }) => {
             type="button"
             onClick={onOpenActivity}
             title="Recent Activity Log"
-            className="w-9 h-9 flex items-center justify-center rounded-full border border-hairline/80 dark:border-white/10 bg-paper/70 dark:bg-[#1e201f]/75 backdrop-blur-md text-muted hover:text-ink hover:bg-paper/90 dark:hover:bg-[#1e201f]/90 shadow-2xs transition-all active:scale-95"
+            className="w-9 h-9 flex items-center justify-center rounded-full border border-hairline dark:border-[#3A3C39] bg-paper text-muted hover:text-ink hover:bg-canvas/50 shadow-2xs transition-all active:scale-95"
           >
             <History className="w-4 h-4" />
           </button>
@@ -100,7 +100,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenActivity }) => {
             type="button"
             onClick={toggleTheme}
             title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-            className="w-9 h-9 flex items-center justify-center rounded-full border border-hairline/80 dark:border-white/10 bg-paper/70 dark:bg-[#1e201f]/75 backdrop-blur-md text-muted hover:text-ink hover:bg-paper/90 dark:hover:bg-[#1e201f]/90 shadow-2xs transition-all active:scale-95"
+            className="w-9 h-9 flex items-center justify-center rounded-full border border-hairline dark:border-[#3A3C39] bg-paper text-muted hover:text-ink hover:bg-canvas/50 shadow-2xs transition-all active:scale-95"
           >
             {theme === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
           </button>

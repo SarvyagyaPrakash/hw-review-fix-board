@@ -142,14 +142,14 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
 
   return (
     <article
-      className={`rounded-card border bg-paper/85 dark:bg-[#232625]/85 backdrop-blur-md p-6 shadow-sm transition-all duration-300 ease-out ${
+      className={`rounded-card border bg-paper p-6 shadow-sm transition-all duration-300 ease-out ${
         justUpdatedTeam
           ? updatedStatusType === 'done'
             ? 'border-emerald-500/80 ring-2 ring-emerald-500/50 shadow-lg shadow-emerald-500/10 scale-[1.008]'
             : updatedStatusType === 'working'
             ? 'border-amber-500/80 ring-2 ring-amber-500/50 shadow-lg shadow-amber-500/10 scale-[1.008]'
             : 'border-neutral-400/80 ring-2 ring-neutral-400/50 shadow-md scale-[1.004]'
-          : 'border-hairline/80 hover:shadow-md'
+          : 'border-hairline/80 dark:border-[#3A3C39] hover:shadow-md'
       }`}
     >
       {/* 1. Header Meta Row */}

@@ -159,7 +159,7 @@ export const ExplorerPage: React.FC = () => {
       </div>
 
       {/* Filter Row */}
-      <div className="relative z-30 p-4 rounded-2xl bg-paper/85 dark:bg-[#232625]/90 border border-hairline/80 dark:border-white/10 backdrop-blur-md flex flex-wrap items-center gap-3 shadow-xs">
+      <div className="relative z-30 p-4 rounded-2xl bg-paper border border-hairline dark:border-[#3A3C39] flex flex-wrap items-center gap-3 shadow-xs">
         {/* Search */}
         <div className="relative flex-1 min-w-[200px]">
           <Search className="w-3.5 h-3.5 text-muted absolute left-3 top-1/2 -translate-y-1/2" />
@@ -171,7 +171,7 @@ export const ExplorerPage: React.FC = () => {
               setPage(1);
             }}
             placeholder="Search text or Player alias..."
-            className="w-full h-9 pl-9 pr-3 rounded-xl text-xs bg-paper/70 dark:bg-[#191b1a]/80 border border-hairline/80 dark:border-white/10 text-ink dark:text-[#ECEAE5] outline-none focus:border-ink dark:focus:border-hairline shadow-2xs transition-colors backdrop-blur-sm"
+            className="w-full h-9 pl-9 pr-3 rounded-xl text-xs bg-white dark:bg-[#1a1c1b] border border-hairline dark:border-[#3A3C39] text-ink outline-none focus:border-ink shadow-2xs transition-colors"
           />
         </div>
 

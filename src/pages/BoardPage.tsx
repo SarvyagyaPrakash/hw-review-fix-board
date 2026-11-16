@@ -215,7 +215,7 @@ export const BoardPage: React.FC = () => {
     <div className="space-y-6">
       {/* 1. Header Stat Tiles */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div className="p-4 rounded-2xl bg-paper/70 dark:bg-[#232625]/75 border border-hairline/80 dark:border-white/10 backdrop-blur-md shadow-xs">
+        <div className="p-4 rounded-2xl bg-paper border border-hairline dark:border-[#3A3C39] shadow-xs">
           <div className="flex items-center gap-2 text-muted text-xs font-medium mb-1">
             <Layers className="w-3.5 h-3.5" />
             <span>Tasks in view</span>
@@ -223,7 +223,7 @@ export const BoardPage: React.FC = () => {
           <p className="font-heading font-extrabold text-2xl text-ink tracking-tight">{stats.inView}</p>
         </div>
 
-        <div className="p-4 rounded-2xl bg-paper/70 dark:bg-[#232625]/75 border border-hairline/80 dark:border-white/10 backdrop-blur-md shadow-xs">
+        <div className="p-4 rounded-2xl bg-paper border border-hairline dark:border-[#3A3C39] shadow-xs">
           <div className="flex items-center gap-2 text-muted text-xs font-medium mb-1">
             <Clock className="w-3.5 h-3.5 text-amber-500" />
             <span>In progress</span>
@@ -233,7 +233,7 @@ export const BoardPage: React.FC = () => {
           </p>
         </div>
 
-        <div className="p-4 rounded-2xl bg-paper/70 dark:bg-[#232625]/75 border border-hairline/80 dark:border-white/10 backdrop-blur-md shadow-xs">
+        <div className="p-4 rounded-2xl bg-paper border border-hairline dark:border-[#3A3C39] shadow-xs">
           <div className="flex items-center gap-2 text-muted text-xs font-medium mb-1">
             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
             <span>Done</span>
@@ -243,7 +243,7 @@ export const BoardPage: React.FC = () => {
           </p>
         </div>
 
-        <div className="p-4 rounded-2xl bg-paper/70 dark:bg-[#232625]/75 border border-hairline/80 dark:border-white/10 backdrop-blur-md shadow-xs">
+        <div className="p-4 rounded-2xl bg-paper border border-hairline dark:border-[#3A3C39] shadow-xs">
           <div className="flex items-center gap-2 text-muted text-xs font-medium mb-1">
             <CheckCircle2 className="w-3.5 h-3.5 text-indigo-500" />
             <span>Reviews 100% completed</span>
@@ -255,7 +255,7 @@ export const BoardPage: React.FC = () => {
       </div>
 
       {/* 2. Filter Bar */}
-      <div className="relative z-30 p-4 rounded-2xl bg-paper/85 dark:bg-[#232625]/90 border border-hairline/80 dark:border-white/10 backdrop-blur-md space-y-3 shadow-xs">
+      <div className="relative z-30 p-4 rounded-2xl bg-paper border border-hairline dark:border-[#3A3C39] space-y-3 shadow-xs">
         <div className="flex flex-wrap items-center gap-3">
           {/* Text Search */}
           <div className="relative flex-1 min-w-[220px]">
@@ -265,7 +265,7 @@ export const BoardPage: React.FC = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search reviews, problems, Player ####..."
-              className="w-full h-10 pl-10 pr-9 rounded-xl text-xs sm:text-sm bg-paper/70 dark:bg-[#1a1c1b]/80 border border-hairline/80 dark:border-white/10 focus:border-ink dark:focus:border-hairline outline-none text-ink dark:text-[#ECEAE5] placeholder:text-muted shadow-2xs transition-colors backdrop-blur-sm"
+              className="w-full h-10 pl-10 pr-9 rounded-xl text-xs sm:text-sm bg-white dark:bg-[#1a1c1b] border border-hairline dark:border-[#3A3C39] focus:border-ink outline-none text-ink placeholder:text-muted shadow-2xs transition-colors"
             />
             {searchQuery && (
               <button
