@@ -341,9 +341,9 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
 
               {/* Assignee and Notes Row */}
               <div className="mt-3 pt-3 border-t border-hairline/40 flex flex-wrap items-center justify-between gap-3 text-xs">
-                <div className="flex items-center gap-1.5 text-muted">
-                  <User className="w-3.5 h-3.5" />
-                  <span>Assignee:</span>
+                <div className="flex items-center gap-2 text-muted">
+                  <User className="w-3.5 h-3.5 flex-shrink-0" />
+                  <span className="font-medium">Assignee:</span>
                   <input
                     type="text"
                     maxLength={40}
@@ -355,14 +355,14 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
                         (e.target as HTMLInputElement).blur();
                       }
                     }}
-                    className="bg-transparent border-b border-hairline focus:border-ink outline-none px-1 py-0.5 text-ink placeholder:text-muted/60 text-xs w-36 transition-colors"
+                    className="h-7 px-2 rounded-lg bg-paper/60 dark:bg-black/20 border border-hairline/70 dark:border-white/10 focus:border-ink dark:focus:border-white/30 outline-none text-ink text-xs w-36 transition-all shadow-2xs"
                   />
                 </div>
 
                 <button
                   type="button"
                   onClick={() => setActiveNotesTeam(activeNotesTeam === tm ? null : tm)}
-                  className="flex items-center gap-1.5 font-medium text-muted hover:text-ink transition-colors px-2 py-1 rounded hover:bg-canvas/40"
+                  className="h-7 flex items-center gap-1.5 font-medium text-muted hover:text-ink transition-colors px-2.5 rounded-lg border border-hairline/60 dark:border-white/10 hover:bg-canvas/50 active:scale-95 shadow-2xs"
                 >
                   <MessageSquare className="w-3.5 h-3.5" />
                   <span>Notes ({notesCount[tm] || 0})</span>
@@ -389,14 +389,14 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
                     )}
                   </div>
 
-                    <div className="flex gap-2">
+                    <div className="flex items-center gap-2">
                       <input
                         type="text"
                         maxLength={500}
                         value={noteBody}
                         onChange={(e) => setNoteBody(e.target.value)}
                         placeholder="Add team note (max 500 chars)..."
-                        className="flex-1 text-xs px-3 py-1.5 rounded-lg border border-hairline/80 dark:border-[#3A3C39] bg-white dark:bg-[#1a1c1b] text-ink dark:text-[#ECEAE5] outline-none focus:border-ink dark:focus:border-hairline placeholder:text-muted shadow-2xs transition-colors"
+                        className="flex-1 h-8 text-xs px-3 rounded-xl border border-hairline/80 dark:border-white/10 bg-paper/90 dark:bg-[#1a1c1b] text-ink dark:text-[#ECEAE5] outline-none focus:border-ink dark:focus:border-hairline placeholder:text-muted shadow-2xs transition-colors"
                         onKeyDown={(e) => {
                           if (e.key === 'Enter') handleAddNote(tm);
                         }}
@@ -405,7 +405,7 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
                         type="button"
                         onClick={() => handleAddNote(tm)}
                         disabled={!noteBody.trim()}
-                        className="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-ink text-paper hover:opacity-90 disabled:opacity-40 transition-opacity shadow-2xs"
+                        className="h-8 px-4 flex items-center justify-center rounded-xl text-xs font-semibold bg-ink text-paper hover:opacity-90 active:scale-95 disabled:opacity-40 transition-all shadow-2xs flex-shrink-0"
                       >
                         Post
                       </button>

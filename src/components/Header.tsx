@@ -4,6 +4,7 @@ import { useData } from '../context/DataContext';
 import { taskStore } from '../store/TaskStore';
 import { TeamId, TEAM_DISPLAY_NAMES, TEAM_COLORS } from '../types';
 import { Sun, Moon, History } from 'lucide-react';
+import { SelectMenu, SelectOption } from './ui/SelectMenu';
 
 interface HeaderProps {
   onOpenActivity: () => void;
@@ -22,8 +23,14 @@ export const Header: React.FC<HeaderProps> = ({ onOpenActivity }) => {
     { to: '/about', label: 'About' },
   ];
 
+  const teamOptions: SelectOption[] = Object.entries(TEAM_DISPLAY_NAMES).map(([id, name]) => ({
+    value: id,
+    label: name,
+    dotColor: TEAM_COLORS[id as TeamId],
+  }));
+
   return (
-    <header className="sticky top-0 z-30 border-b border-hairline/80 bg-paper/85 backdrop-blur-md transition-colors">
+    <header className="sticky top-0 z-30 border-b border-hairline/80 bg-paper/85 dark:bg-[#1c1e1d]/85 backdrop-blur-md transition-colors">
       {/* Local-only Banner if no Supabase credentials */}
       {isLocalOnly && (
         <div className="bg-amber-500/10 border-b border-amber-500/20 py-1 px-4 text-center text-xs font-medium text-amber-800 dark:text-amber-200">
@@ -44,9 +51,9 @@ export const Header: React.FC<HeaderProps> = ({ onOpenActivity }) => {
                 key={item.to}
                 to={item.to}
                 className={({ isActive }) =>
-                  `px-3 py-1.5 rounded-lg text-sm font-semibold transition-all ${
+                  `h-9 flex items-center px-3.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
                     isActive
-                      ? 'bg-ink text-paper shadow-sm'
+                      ? 'bg-ink text-paper shadow-xs'
                       : 'text-muted hover:text-ink hover:bg-canvas/50'
                   }`
                 }
@@ -58,34 +65,24 @@ export const Header: React.FC<HeaderProps> = ({ onOpenActivity }) => {
         </div>
 
         {/* Right Utility Bar: Viewing as, Activity, Theme toggle */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
           {/* "Viewing as" Team Selector */}
           <div className="flex items-center gap-2 pl-3 border-l border-hairline/80 text-xs">
-            <span className="text-muted font-medium hidden sm:inline">Viewing as:</span>
-            <div className="flex items-center gap-1.5">
-              <span
-                className="w-2.5 h-2.5 rounded-full flex-shrink-0 transition-colors"
-                style={{ backgroundColor: TEAM_COLORS[viewingAsTeam] }}
-              />
-              <select
-                aria-label="Select active team role"
-                value={viewingAsTeam}
-                onChange={(e) => {
-                  const t = e.target.value as TeamId;
-                  const name = TEAM_DISPLAY_NAMES[t];
-                  setViewingAsTeam(t);
-                  setActorName(name);
-                  taskStore.recordViewer(name, t);
-                }}
-                className="bg-white dark:bg-[#1a1c1b] text-ink dark:text-[#ECEAE5] font-semibold rounded-lg px-2.5 py-1.5 border border-hairline/80 dark:border-[#3A3C39] outline-none focus:border-ink dark:focus:border-hairline cursor-pointer text-xs shadow-2xs transition-colors"
-              >
-                {Object.entries(TEAM_DISPLAY_NAMES).map(([id, name]) => (
-                  <option key={id} value={id} className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">
-                    {name}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <span className="text-muted font-medium hidden lg:inline">Viewing as:</span>
+            <SelectMenu
+              value={viewingAsTeam}
+              options={teamOptions}
+              onChange={(val) => {
+                const t = val as TeamId;
+                const name = TEAM_DISPLAY_NAMES[t];
+                setViewingAsTeam(t);
+                setActorName(name);
+                taskStore.recordViewer(name, t);
+              }}
+              ariaLabel="Select active team role"
+              align="right"
+              className="rounded-full"
+            />
           </div>
 
           {/* Global Activity Drawer Toggle */}
@@ -93,7 +90,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenActivity }) => {
             type="button"
             onClick={onOpenActivity}
             title="Recent Activity Log"
-            className="p-2 rounded-lg text-muted hover:text-ink hover:bg-canvas/60 transition-colors"
+            className="w-9 h-9 flex items-center justify-center rounded-full border border-hairline/80 dark:border-white/10 bg-paper/70 dark:bg-[#1e201f]/75 backdrop-blur-md text-muted hover:text-ink hover:bg-paper/90 dark:hover:bg-[#1e201f]/90 shadow-2xs transition-all active:scale-95"
           >
             <History className="w-4 h-4" />
           </button>
@@ -103,7 +100,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenActivity }) => {
             type="button"
             onClick={toggleTheme}
             title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-            className="p-2 rounded-lg text-muted hover:text-ink hover:bg-canvas/60 transition-colors"
+            className="w-9 h-9 flex items-center justify-center rounded-full border border-hairline/80 dark:border-white/10 bg-paper/70 dark:bg-[#1e201f]/75 backdrop-blur-md text-muted hover:text-ink hover:bg-paper/90 dark:hover:bg-[#1e201f]/90 shadow-2xs transition-all active:scale-95"
           >
             {theme === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
           </button>

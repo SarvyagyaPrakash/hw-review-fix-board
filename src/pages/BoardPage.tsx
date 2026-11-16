@@ -2,8 +2,9 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { useData } from '../context/DataContext';
 import { ReviewCard } from '../components/ReviewCard';
 import { taskStore } from '../store/TaskStore';
-import { TEAM_DISPLAY_NAMES } from '../types';
+import { TEAM_DISPLAY_NAMES, TEAM_COLORS } from '../types';
 import { Search, X, Filter, AlertCircle, CheckCircle2, Clock, Layers } from 'lucide-react';
+import { SelectMenu, SelectOption } from '../components/ui/SelectMenu';
 
 export const BoardPage: React.FC = () => {
   const { reviews, selectedTeam, taxonomy } = useData();
@@ -166,69 +167,111 @@ export const BoardPage: React.FC = () => {
     setFilterStars('all');
   };
 
+  // iOS-style Select Options
+  const sortOptions: SelectOption[] = [
+    { value: 'priority', label: 'Priority formula' },
+    { value: 'newest', label: 'Newest first' },
+    { value: 'thumbs', label: 'Most thumbs-up' },
+  ];
+
+  const statusOptions: SelectOption[] = [
+    { value: 'all', label: 'All statuses' },
+    { value: 'todo', label: 'To do', dotColor: '#9ca3af' },
+    { value: 'working', label: 'Working', dotColor: '#f59e0b' },
+    { value: 'done', label: 'Done', dotColor: '#10b981' },
+  ];
+
+  const themeOptions: SelectOption[] = useMemo(() => {
+    const list: SelectOption[] = [{ value: 'all', label: 'All themes' }];
+    if (taxonomy?.themes) {
+      taxonomy.themes.forEach((th) => {
+        list.push({
+          value: th.id,
+          label: th.name,
+          dotColor: th.teams[0] ? TEAM_COLORS[th.teams[0]] : undefined,
+        });
+      });
+    }
+    return list;
+  }, [taxonomy]);
+
+  const severityOptions: SelectOption[] = [
+    { value: 'all', label: 'All severities' },
+    { value: '3', label: 'Severity 3 (Critical)', dotColor: '#ef4444' },
+    { value: '2', label: 'Severity 2 (Major)', dotColor: '#f59e0b' },
+    { value: '1', label: 'Severity 1 (Minor)', dotColor: '#10b981' },
+  ];
+
+  const starOptions: SelectOption[] = [
+    { value: 'all', label: 'All star ratings' },
+    { value: '1', label: '1 star' },
+    { value: '2', label: '2 stars' },
+    { value: '3', label: '3 stars' },
+  ];
+
   const paginatedReviews = sortedReviews.slice(0, visibleCount);
 
   return (
     <div className="space-y-6">
       {/* 1. Header Stat Tiles */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div className="p-4 rounded-xl bg-paper/70 border border-hairline/80 backdrop-blur-md">
+        <div className="p-4 rounded-2xl bg-paper/70 dark:bg-[#232625]/75 border border-hairline/80 dark:border-white/10 backdrop-blur-md shadow-xs">
           <div className="flex items-center gap-2 text-muted text-xs font-medium mb-1">
             <Layers className="w-3.5 h-3.5" />
             <span>Tasks in view</span>
           </div>
-          <p className="font-heading font-extrabold text-2xl text-ink">{stats.inView}</p>
+          <p className="font-heading font-extrabold text-2xl text-ink tracking-tight">{stats.inView}</p>
         </div>
 
-        <div className="p-4 rounded-xl bg-paper/70 border border-hairline/80 backdrop-blur-md">
+        <div className="p-4 rounded-2xl bg-paper/70 dark:bg-[#232625]/75 border border-hairline/80 dark:border-white/10 backdrop-blur-md shadow-xs">
           <div className="flex items-center gap-2 text-muted text-xs font-medium mb-1">
             <Clock className="w-3.5 h-3.5 text-amber-500" />
             <span>In progress</span>
           </div>
-          <p className="font-heading font-extrabold text-2xl text-amber-600 dark:text-amber-400">
+          <p className="font-heading font-extrabold text-2xl text-amber-600 dark:text-amber-400 tracking-tight">
             {stats.inProgress}
           </p>
         </div>
 
-        <div className="p-4 rounded-xl bg-paper/70 border border-hairline/80 backdrop-blur-md">
+        <div className="p-4 rounded-2xl bg-paper/70 dark:bg-[#232625]/75 border border-hairline/80 dark:border-white/10 backdrop-blur-md shadow-xs">
           <div className="flex items-center gap-2 text-muted text-xs font-medium mb-1">
             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
             <span>Done</span>
           </div>
-          <p className="font-heading font-extrabold text-2xl text-emerald-600 dark:text-emerald-400">
+          <p className="font-heading font-extrabold text-2xl text-emerald-600 dark:text-emerald-400 tracking-tight">
             {stats.done}
           </p>
         </div>
 
-        <div className="p-4 rounded-xl bg-paper/70 border border-hairline/80 backdrop-blur-md">
+        <div className="p-4 rounded-2xl bg-paper/70 dark:bg-[#232625]/75 border border-hairline/80 dark:border-white/10 backdrop-blur-md shadow-xs">
           <div className="flex items-center gap-2 text-muted text-xs font-medium mb-1">
             <CheckCircle2 className="w-3.5 h-3.5 text-indigo-500" />
             <span>Reviews 100% completed</span>
           </div>
-          <p className="font-heading font-extrabold text-2xl text-indigo-600 dark:text-indigo-400">
+          <p className="font-heading font-extrabold text-2xl text-indigo-600 dark:text-indigo-400 tracking-tight">
             {stats.completedReviews}
           </p>
         </div>
       </div>
 
       {/* 2. Filter Bar */}
-      <div className="p-4 rounded-2xl bg-paper/85 dark:bg-[#232625]/90 border border-hairline/80 backdrop-blur-md space-y-3 shadow-xs">
+      <div className="p-4 rounded-2xl bg-paper/80 dark:bg-[#232625]/85 border border-hairline/80 dark:border-white/10 backdrop-blur-md space-y-3 shadow-xs">
         <div className="flex flex-wrap items-center gap-3">
           {/* Text Search */}
           <div className="relative flex-1 min-w-[220px]">
-            <Search className="w-4 h-4 text-muted absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-muted absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search reviews, problems, Player ####..."
-              className="w-full pl-9 pr-8 py-2 rounded-xl text-xs sm:text-sm bg-white dark:bg-[#191b1a] border border-hairline/80 dark:border-[#3A3C39] focus:border-ink dark:focus:border-hairline outline-none text-ink dark:text-[#ECEAE5] placeholder:text-muted shadow-2xs transition-colors"
+              className="w-full h-10 pl-10 pr-9 rounded-xl text-xs sm:text-sm bg-paper/70 dark:bg-[#1a1c1b]/80 border border-hairline/80 dark:border-white/10 focus:border-ink dark:focus:border-hairline outline-none text-ink dark:text-[#ECEAE5] placeholder:text-muted shadow-2xs transition-colors backdrop-blur-sm"
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => setSearchQuery('')}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted hover:text-ink"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-ink"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -238,86 +281,67 @@ export const BoardPage: React.FC = () => {
           {/* Sort By Dropdown */}
           <div className="flex items-center gap-2 text-xs">
             <span className="text-muted font-medium">Sort:</span>
-            <select
-              aria-label="Sort reviews"
+            <SelectMenu
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as 'priority' | 'newest' | 'thumbs')}
-              className="px-3 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-[#191b1a] border border-hairline/80 dark:border-[#3A3C39] text-ink dark:text-[#ECEAE5] outline-none cursor-pointer shadow-2xs transition-colors"
-            >
-              <option value="priority" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">Priority formula</option>
-              <option value="newest" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">Newest first</option>
-              <option value="thumbs" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">Most thumbs-up</option>
-            </select>
+              options={sortOptions}
+              onChange={(val) => setSortBy(val as 'priority' | 'newest' | 'thumbs')}
+              ariaLabel="Sort reviews"
+              align="right"
+              className="rounded-xl"
+            />
           </div>
         </div>
 
         {/* Dropdown Filters Row */}
-        <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-hairline/40 text-xs">
+        <div className="flex flex-wrap items-center gap-2 pt-2.5 border-t border-hairline/40 text-xs">
           <div className="flex items-center gap-1.5 text-muted font-medium mr-1">
             <Filter className="w-3.5 h-3.5" />
             <span>Filters:</span>
           </div>
 
           {/* Status */}
-          <select
-            aria-label="Filter by task status"
+          <SelectMenu
             value={filterStatus}
-            onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-white dark:bg-[#191b1a] border border-hairline/80 dark:border-[#3A3C39] text-ink dark:text-[#ECEAE5] outline-none cursor-pointer shadow-2xs transition-colors"
-          >
-            <option value="all" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">All statuses</option>
-            <option value="todo" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">To do</option>
-            <option value="working" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">Working</option>
-            <option value="done" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">Done</option>
-          </select>
+            options={statusOptions}
+            onChange={setFilterStatus}
+            ariaLabel="Filter by task status"
+            size="sm"
+          />
 
           {/* Theme */}
-          <select
-            aria-label="Filter by issue theme"
+          <SelectMenu
             value={filterTheme}
-            onChange={(e) => setFilterTheme(e.target.value)}
-            className="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-white dark:bg-[#191b1a] border border-hairline/80 dark:border-[#3A3C39] text-ink dark:text-[#ECEAE5] outline-none cursor-pointer shadow-2xs transition-colors max-w-[180px] truncate"
-          >
-            <option value="all" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">All themes</option>
-            {taxonomy?.themes.map((th) => (
-              <option key={th.id} value={th.id} className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">
-                {th.name}
-              </option>
-            ))}
-          </select>
+            options={themeOptions}
+            onChange={setFilterTheme}
+            ariaLabel="Filter by issue theme"
+            size="sm"
+            className="max-w-[200px]"
+          />
 
           {/* Severity */}
-          <select
-            aria-label="Filter by issue severity"
+          <SelectMenu
             value={filterSeverity}
-            onChange={(e) => setFilterSeverity(e.target.value)}
-            className="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-white dark:bg-[#191b1a] border border-hairline/80 dark:border-[#3A3C39] text-ink dark:text-[#ECEAE5] outline-none cursor-pointer shadow-2xs transition-colors"
-          >
-            <option value="all" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">All severities</option>
-            <option value="3" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">Severity 3 (Critical)</option>
-            <option value="2" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">Severity 2 (Major)</option>
-            <option value="1" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">Severity 1 (Minor)</option>
-          </select>
+            options={severityOptions}
+            onChange={setFilterSeverity}
+            ariaLabel="Filter by issue severity"
+            size="sm"
+          />
 
           {/* Star rating */}
-          <select
-            aria-label="Filter by review stars"
+          <SelectMenu
             value={filterStars}
-            onChange={(e) => setFilterStars(e.target.value)}
-            className="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-white dark:bg-[#191b1a] border border-hairline/80 dark:border-[#3A3C39] text-ink dark:text-[#ECEAE5] outline-none cursor-pointer shadow-2xs transition-colors"
-          >
-            <option value="all" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">All star ratings</option>
-            <option value="1" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">1 star</option>
-            <option value="2" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">2 stars</option>
-            <option value="3" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">3 stars</option>
-          </select>
+            options={starOptions}
+            onChange={setFilterStars}
+            ariaLabel="Filter by review stars"
+            size="sm"
+          />
 
           {/* Active Filter Clear */}
           {activeFilterCount > 0 && (
             <button
               type="button"
               onClick={clearAllFilters}
-              className="ml-auto inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors"
+              className="ml-auto h-8 inline-flex items-center gap-1.5 px-3 rounded-xl text-xs font-semibold text-rose-600 dark:text-rose-400 bg-rose-50/80 dark:bg-rose-950/40 border border-rose-200/60 dark:border-rose-900/60 hover:bg-rose-100 dark:hover:bg-rose-900/60 transition-colors shadow-2xs"
             >
               <X className="w-3.5 h-3.5" />
               <span>Clear filters ({activeFilterCount})</span>

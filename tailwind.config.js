@@ -24,8 +24,8 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['"Figtree Variable"', 'sans-serif'],
-        heading: ['"Bricolage Grotesque Variable"', 'sans-serif'],
+        sans: ['"Inter Variable"', '"Figtree Variable"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        heading: ['"Plus Jakarta Sans Variable"', '"Bricolage Grotesque Variable"', 'sans-serif'],
       },
       borderRadius: {
         card: '18px',

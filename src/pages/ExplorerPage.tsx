@@ -3,6 +3,7 @@ import { useData } from '../context/DataContext';
 import { taskStore } from '../store/TaskStore';
 import { TEAM_DISPLAY_NAMES } from '../types';
 import { Search, Download, Star, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from 'lucide-react';
+import { SelectMenu, SelectOption } from '../components/ui/SelectMenu';
 
 export const ExplorerPage: React.FC = () => {
   const { reviews, taxonomy } = useData();
@@ -21,6 +22,29 @@ export const ExplorerPage: React.FC = () => {
   const toggleRow = (id: string) => {
     setExpandedRows((prev) => ({ ...prev, [id]: !prev[id] }));
   };
+
+  const starOptions: SelectOption[] = [
+    { value: 'all', label: 'All Stars' },
+    { value: '1', label: '1 Star' },
+    { value: '2', label: '2 Stars' },
+    { value: '3', label: '3 Stars' },
+  ];
+
+  const themeOptions: SelectOption[] = useMemo(() => {
+    const list: SelectOption[] = [{ value: 'all', label: 'All Themes' }];
+    if (taxonomy?.themes) {
+      taxonomy.themes.forEach((th) => {
+        list.push({ value: th.id, label: th.name });
+      });
+    }
+    return list;
+  }, [taxonomy]);
+
+  const actionableOptions: SelectOption[] = [
+    { value: 'all', label: 'All Actionable' },
+    { value: 'yes', label: 'Actionable only' },
+    { value: 'no', label: 'Non-actionable only' },
+  ];
 
   const filteredReviews = useMemo(() => {
     return reviews.filter((r) => {
@@ -135,7 +159,7 @@ export const ExplorerPage: React.FC = () => {
       </div>
 
       {/* Filter Row */}
-      <div className="p-4 rounded-xl bg-paper/85 border border-hairline backdrop-blur-md flex flex-wrap items-center gap-3">
+      <div className="p-4 rounded-2xl bg-paper/80 dark:bg-[#232625]/85 border border-hairline/80 dark:border-white/10 backdrop-blur-md flex flex-wrap items-center gap-3 shadow-xs">
         {/* Search */}
         <div className="relative flex-1 min-w-[200px]">
           <Search className="w-3.5 h-3.5 text-muted absolute left-3 top-1/2 -translate-y-1/2" />
@@ -147,55 +171,46 @@ export const ExplorerPage: React.FC = () => {
               setPage(1);
             }}
             placeholder="Search text or Player alias..."
-            className="w-full pl-8 pr-3 py-1.5 rounded-lg text-xs bg-white dark:bg-[#191b1a] border border-hairline/80 dark:border-[#3A3C39] text-ink dark:text-[#ECEAE5] outline-none focus:border-ink dark:focus:border-hairline shadow-2xs transition-colors"
+            className="w-full h-9 pl-9 pr-3 rounded-xl text-xs bg-paper/70 dark:bg-[#191b1a]/80 border border-hairline/80 dark:border-white/10 text-ink dark:text-[#ECEAE5] outline-none focus:border-ink dark:focus:border-hairline shadow-2xs transition-colors backdrop-blur-sm"
           />
         </div>
 
         {/* Stars */}
-        <select
+        <SelectMenu
           value={starFilter}
-          onChange={(e) => {
-            setStarFilter(e.target.value);
+          options={starOptions}
+          onChange={(val) => {
+            setStarFilter(val);
             setPage(1);
           }}
-          className="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-white dark:bg-[#191b1a] border border-hairline/80 dark:border-[#3A3C39] text-ink dark:text-[#ECEAE5] outline-none cursor-pointer shadow-2xs transition-colors"
-        >
-          <option value="all" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">All Stars</option>
-          <option value="1" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">1 Star</option>
-          <option value="2" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">2 Stars</option>
-          <option value="3" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">3 Stars</option>
-        </select>
+          ariaLabel="Filter by stars"
+          size="sm"
+        />
 
         {/* Theme */}
-        <select
+        <SelectMenu
           value={themeFilter}
-          onChange={(e) => {
-            setThemeFilter(e.target.value);
+          options={themeOptions}
+          onChange={(val) => {
+            setThemeFilter(val);
             setPage(1);
           }}
-          className="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-white dark:bg-[#191b1a] border border-hairline/80 dark:border-[#3A3C39] text-ink dark:text-[#ECEAE5] outline-none cursor-pointer shadow-2xs transition-colors max-w-[180px] truncate"
-        >
-          <option value="all" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">All Themes</option>
-          {taxonomy?.themes.map((th) => (
-            <option key={th.id} value={th.id} className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">
-              {th.name}
-            </option>
-          ))}
-        </select>
+          ariaLabel="Filter by theme"
+          size="sm"
+          className="max-w-[200px]"
+        />
 
         {/* Actionable */}
-        <select
+        <SelectMenu
           value={actionableFilter}
-          onChange={(e) => {
-            setActionableFilter(e.target.value);
+          options={actionableOptions}
+          onChange={(val) => {
+            setActionableFilter(val);
             setPage(1);
           }}
-          className="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-white dark:bg-[#191b1a] border border-hairline/80 dark:border-[#3A3C39] text-ink dark:text-[#ECEAE5] outline-none cursor-pointer shadow-2xs transition-colors"
-        >
-          <option value="all" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">All Actionable</option>
-          <option value="yes" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">Actionable only</option>
-          <option value="no" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">Non-actionable only</option>
-        </select>
+          ariaLabel="Filter by actionable"
+          size="sm"
+        />
       </div>
 
       {/* Table */}

@@ -312,21 +312,21 @@ export const InsightsPage: React.FC = () => {
                 setQuestion(ex);
                 handleAskQuestion(ex);
               }}
-              className="px-2.5 py-1 rounded-lg text-xs font-medium bg-canvas/60 border border-hairline text-muted hover:text-ink hover:bg-canvas transition-colors"
+              className="h-7 px-3 inline-flex items-center rounded-lg text-xs font-medium border border-hairline/70 dark:border-white/10 bg-paper/60 dark:bg-[#1e201f]/60 text-muted hover:text-ink hover:bg-paper/90 dark:hover:bg-[#1e201f]/90 transition-all shadow-2xs"
             >
               “{ex}”
             </button>
           ))}
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex items-center gap-2">
           <input
             type="text"
             maxLength={300}
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
             placeholder="Type your question about Hitwicket player feedback..."
-            className="flex-1 px-4 py-2 text-xs sm:text-sm rounded-xl border border-hairline bg-canvas/40 text-ink outline-none focus:border-ink placeholder:text-muted"
+            className="flex-1 h-10 px-4 text-xs sm:text-sm rounded-xl border border-hairline/80 dark:border-white/10 bg-paper/70 dark:bg-[#191b1a]/80 text-ink dark:text-[#ECEAE5] outline-none focus:border-ink dark:focus:border-hairline placeholder:text-muted shadow-2xs backdrop-blur-sm transition-colors"
             onKeyDown={(e) => {
               if (e.key === 'Enter') handleAskQuestion(question);
             }}
@@ -335,7 +335,7 @@ export const InsightsPage: React.FC = () => {
             type="button"
             onClick={() => handleAskQuestion(question)}
             disabled={chatLoading || !question.trim()}
-            className="px-4 py-2 rounded-xl text-xs font-bold bg-ink text-paper hover:opacity-90 disabled:opacity-40 flex items-center gap-1.5 transition-opacity"
+            className="h-10 px-4 rounded-xl text-xs font-bold bg-ink text-paper hover:opacity-90 active:scale-95 disabled:opacity-40 flex items-center justify-center gap-1.5 transition-all shadow-2xs flex-shrink-0"
           >
             {chatLoading ? <span>Searching…</span> : <Send className="w-3.5 h-3.5" />}
           </button>

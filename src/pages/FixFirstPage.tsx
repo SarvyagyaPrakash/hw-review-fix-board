@@ -119,16 +119,16 @@ export const FixFirstPage: React.FC = () => {
           <button
             type="button"
             onClick={handleCopyText}
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-paper border border-hairline text-ink hover:bg-canvas transition-colors shadow-xs"
+            className="h-9 inline-flex items-center gap-1.5 px-3.5 rounded-xl text-xs font-semibold bg-paper/70 dark:bg-[#1e201f]/75 border border-hairline/80 dark:border-white/10 backdrop-blur-md text-ink dark:text-[#ECEAE5] hover:bg-paper/90 dark:hover:bg-[#1e201f]/90 transition-all shadow-2xs active:scale-95"
           >
-            {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
+            {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-muted" />}
             <span>{copied ? 'Copied' : 'Copy as text'}</span>
           </button>
 
           <button
             type="button"
             onClick={handlePrint}
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-ink text-paper hover:opacity-90 transition-opacity shadow-xs"
+            className="h-9 inline-flex items-center gap-1.5 px-4 rounded-xl text-xs font-semibold bg-ink text-paper hover:opacity-90 active:scale-95 transition-all shadow-2xs"
           >
             <Printer className="w-3.5 h-3.5" />
             <span>Print A4</span>

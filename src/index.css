@@ -1,3 +1,5 @@
+@import '@fontsource-variable/plus-jakarta-sans';
+@import '@fontsource-variable/inter';
 @import '@fontsource-variable/bricolage-grotesque';
 @import '@fontsource-variable/figtree';
 
@@ -36,11 +38,13 @@ html.dark {
 }
 
 body {
-  font-family: 'Figtree Variable', sans-serif;
+  font-family: 'Inter Variable', -apple-system, BlinkMacSystemFont, 'Figtree Variable', sans-serif;
   color: var(--ink);
   background-color: var(--canvas);
   min-height: 100vh;
   position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Seamless Marbled Swirl Background Tile (Applied via fixed pseudo-element for iOS compatibility) */
