@@ -29,6 +29,8 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
   const [expandedText, setExpandedText] = useState(false);
   const [activeNotesTeam, setActiveNotesTeam] = useState<TeamId | null>(null);
   const [noteBody, setNoteBody] = useState('');
+  const [justUpdatedTeam, setJustUpdatedTeam] = useState<TeamId | null>(null);
+  const [updatedStatusType, setUpdatedStatusType] = useState<TaskStatusType | null>(null);
 
   // Local state for live reactivity
   const [teamStatuses, setTeamStatuses] = useState<Record<TeamId, TaskStatusType>>(() => {
@@ -77,6 +79,13 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
   }, [review.id, review.teams]);
 
   const handleStatusChange = async (team: TeamId, newStatus: TaskStatusType) => {
+    setJustUpdatedTeam(team);
+    setUpdatedStatusType(newStatus);
+    setTimeout(() => {
+      setJustUpdatedTeam(null);
+      setUpdatedStatusType(null);
+    }, 1200);
+
     const ok = await taskStore.setStatus(review.id, team, newStatus, actorName);
     if (ok) {
       if (onStatusChangeSuccess) {
@@ -132,7 +141,17 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
   const owningTeamIds = review.teams.map((t) => t.team);
 
   return (
-    <article className="rounded-card border border-hairline/80 bg-paper/75 backdrop-blur-md p-6 shadow-sm hover:shadow-md transition-shadow">
+    <article
+      className={`rounded-card border bg-paper/85 dark:bg-[#232625]/85 backdrop-blur-md p-6 shadow-sm transition-all duration-300 ease-out ${
+        justUpdatedTeam
+          ? updatedStatusType === 'done'
+            ? 'border-emerald-500/80 ring-2 ring-emerald-500/50 shadow-lg shadow-emerald-500/10 scale-[1.008]'
+            : updatedStatusType === 'working'
+            ? 'border-amber-500/80 ring-2 ring-amber-500/50 shadow-lg shadow-amber-500/10 scale-[1.008]'
+            : 'border-neutral-400/80 ring-2 ring-neutral-400/50 shadow-md scale-[1.004]'
+          : 'border-hairline/80 hover:shadow-md'
+      }`}
+    >
       {/* 1. Header Meta Row */}
       <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-muted mb-4 pb-3 border-b border-hairline/40">
         <div className="flex items-center gap-3">
@@ -266,6 +285,11 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
                 </div>
 
                 <div className="flex items-center gap-2">
+                  {justUpdatedTeam === tm && (
+                    <span className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 animate-pulse transition-all">
+                      Saved ✓
+                    </span>
+                  )}
                   <StatusControl
                     team={tm}
                     currentStatus={st}
@@ -365,27 +389,27 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
                     )}
                   </div>
 
-                  <div className="flex gap-2">
-                    <input
-                      type="text"
-                      maxLength={500}
-                      value={noteBody}
-                      onChange={(e) => setNoteBody(e.target.value)}
-                      placeholder="Add team note (max 500 chars)..."
-                      className="flex-1 text-xs px-3 py-1.5 rounded-lg border border-hairline bg-paper text-ink outline-none focus:border-ink placeholder:text-muted"
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter') handleAddNote(tm);
-                      }}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => handleAddNote(tm)}
-                      disabled={!noteBody.trim()}
-                      className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-ink text-paper disabled:opacity-40"
-                    >
-                      Post
-                    </button>
-                  </div>
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        maxLength={500}
+                        value={noteBody}
+                        onChange={(e) => setNoteBody(e.target.value)}
+                        placeholder="Add team note (max 500 chars)..."
+                        className="flex-1 text-xs px-3 py-1.5 rounded-lg border border-hairline/80 dark:border-[#3A3C39] bg-white dark:bg-[#1a1c1b] text-ink dark:text-[#ECEAE5] outline-none focus:border-ink dark:focus:border-hairline placeholder:text-muted shadow-2xs transition-colors"
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') handleAddNote(tm);
+                        }}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => handleAddNote(tm)}
+                        disabled={!noteBody.trim()}
+                        className="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-ink text-paper hover:opacity-90 disabled:opacity-40 transition-opacity shadow-2xs"
+                      >
+                        Post
+                      </button>
+                    </div>
                 </div>
               )}
             </div>

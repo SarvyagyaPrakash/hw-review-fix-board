@@ -25,7 +25,7 @@ export const StatusControl: React.FC<StatusControlProps> = ({
     <div
       role="group"
       aria-label={`Status control for ${team}`}
-      className="inline-flex rounded-lg border border-hairline p-0.5 bg-paper/60 backdrop-blur-sm"
+      className="inline-flex rounded-lg border border-hairline/80 dark:border-[#3A3C39] p-0.5 bg-paper/85 dark:bg-[#1a1c1b] backdrop-blur-sm shadow-2xs"
     >
       {options.map((opt) => {
         const isActive = currentStatus === opt.id;
@@ -36,7 +36,9 @@ export const StatusControl: React.FC<StatusControlProps> = ({
             disabled={disabled}
             aria-pressed={isActive}
             onClick={() => onChange(opt.id)}
-            className="px-2.5 py-1 text-xs font-semibold rounded-md transition-all duration-200"
+            className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-all duration-200 transform active:scale-95 ${
+              isActive ? 'shadow-xs scale-[1.02]' : 'hover:bg-canvas/40 active:scale-95'
+            }`}
             style={{
               backgroundColor: isActive ? teamColor : 'transparent',
               color: isActive ? '#FFFFFF' : 'var(--muted)',

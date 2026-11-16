@@ -1,20 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useData } from '../context/DataContext';
 import { taskStore } from '../store/TaskStore';
 import { TeamId, TEAM_DISPLAY_NAMES, TEAM_COLORS } from '../types';
-import { Sun, Moon, History, Radio } from 'lucide-react';
+import { Sun, Moon, History } from 'lucide-react';
 
 interface HeaderProps {
   onOpenActivity: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({ onOpenActivity }) => {
-  const { viewingAsTeam, setViewingAsTeam, actorName, setActorName, theme, toggleTheme } = useData();
-  const [editingActor, setEditingActor] = useState(false);
-  const [tempActor, setTempActor] = useState(actorName);
+  const { viewingAsTeam, setViewingAsTeam, setActorName, theme, toggleTheme } = useData();
 
-  const syncState = taskStore.syncState;
   const isLocalOnly = taskStore.isLocalOnly;
 
   const navItems = [
@@ -60,14 +57,14 @@ export const Header: React.FC<HeaderProps> = ({ onOpenActivity }) => {
           </nav>
         </div>
 
-        {/* Right Utility Bar: Viewing as, Sync status, Activity, Theme toggle */}
+        {/* Right Utility Bar: Viewing as, Activity, Theme toggle */}
         <div className="flex items-center gap-3">
           {/* "Viewing as" Team Selector */}
-          <div className="hidden sm:flex items-center gap-2 pl-3 border-l border-hairline text-xs">
-            <span className="text-muted font-medium">Viewing as:</span>
+          <div className="flex items-center gap-2 pl-3 border-l border-hairline/80 text-xs">
+            <span className="text-muted font-medium hidden sm:inline">Viewing as:</span>
             <div className="flex items-center gap-1.5">
               <span
-                className="w-2.5 h-2.5 rounded-full"
+                className="w-2.5 h-2.5 rounded-full flex-shrink-0 transition-colors"
                 style={{ backgroundColor: TEAM_COLORS[viewingAsTeam] }}
               />
               <select
@@ -75,66 +72,20 @@ export const Header: React.FC<HeaderProps> = ({ onOpenActivity }) => {
                 value={viewingAsTeam}
                 onChange={(e) => {
                   const t = e.target.value as TeamId;
+                  const name = TEAM_DISPLAY_NAMES[t];
                   setViewingAsTeam(t);
-                  setActorName(TEAM_DISPLAY_NAMES[t]);
-                  setTempActor(TEAM_DISPLAY_NAMES[t]);
+                  setActorName(name);
+                  taskStore.recordViewer(name, t);
                 }}
-                className="bg-canvas/60 text-ink font-semibold rounded px-2 py-1 border border-hairline outline-none focus:border-ink cursor-pointer text-xs"
+                className="bg-white dark:bg-[#1a1c1b] text-ink dark:text-[#ECEAE5] font-semibold rounded-lg px-2.5 py-1.5 border border-hairline/80 dark:border-[#3A3C39] outline-none focus:border-ink dark:focus:border-hairline cursor-pointer text-xs shadow-2xs transition-colors"
               >
                 {Object.entries(TEAM_DISPLAY_NAMES).map(([id, name]) => (
-                  <option key={id} value={id}>
+                  <option key={id} value={id} className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">
                     {name}
                   </option>
                 ))}
               </select>
-
-              {editingActor ? (
-                <input
-                  type="text"
-                  maxLength={40}
-                  value={tempActor}
-                  onChange={(e) => setTempActor(e.target.value)}
-                  onBlur={() => {
-                    setActorName(tempActor.trim() || TEAM_DISPLAY_NAMES[viewingAsTeam]);
-                    setEditingActor(false);
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      setActorName(tempActor.trim() || TEAM_DISPLAY_NAMES[viewingAsTeam]);
-                      setEditingActor(false);
-                    }
-                  }}
-                  autoFocus
-                  className="bg-paper border border-ink px-1.5 py-0.5 rounded text-xs w-28 text-ink"
-                />
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => setEditingActor(true)}
-                  title="Click to edit your display name"
-                  className="text-muted hover:text-ink underline decoration-dotted max-w-[100px] truncate"
-                >
-                  ({actorName})
-                </button>
-              )}
             </div>
-          </div>
-
-          {/* Sync Pill */}
-          <div
-            title={`Realtime Sync State: ${syncState}`}
-            className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border border-hairline bg-canvas/60"
-          >
-            <Radio
-              className={`w-3 h-3 ${
-                syncState === 'live'
-                  ? 'text-emerald-500 animate-pulse'
-                  : syncState === 'connecting'
-                  ? 'text-amber-500'
-                  : 'text-muted'
-              }`}
-            />
-            <span className="capitalize text-muted text-[11px]">{isLocalOnly ? 'Local' : syncState}</span>
           </div>
 
           {/* Global Activity Drawer Toggle */}

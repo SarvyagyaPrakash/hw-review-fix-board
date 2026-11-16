@@ -85,6 +85,11 @@ export const ActivityDrawer: React.FC<ActivityDrawerProps> = ({ isOpen, onClose 
                       </>
                     )}
                     {act.kind === 'note' && <>posted a note</>}
+                    {act.kind === 'viewing' && (
+                      <>
+                        is viewing the board as <span className="font-bold">{teamName}</span>
+                      </>
+                    )}
                   </p>
                 </div>
               );

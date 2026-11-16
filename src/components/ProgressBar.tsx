@@ -53,7 +53,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({ teams, statuses }) => 
         aria-valuemin={0}
         aria-valuemax={100}
         aria-label={`Progress: ${percent}%. Teams: ${ariaText}`}
-        className="w-full h-2.5 rounded-full bg-hairline/60 overflow-hidden flex gap-1 p-0.5"
+        className="w-full h-2.5 rounded-full bg-hairline/60 dark:bg-[#3A3C39]/80 overflow-hidden flex gap-1 p-0.5 shadow-inner"
       >
         {teams.map((t) => {
           const st = statuses[t] || 'todo';
@@ -63,15 +63,16 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({ teams, statuses }) => 
             <div
               key={t}
               title={`${TEAM_DISPLAY_NAMES[t]}: ${st}`}
-              className="h-full flex-1 rounded-sm transition-all duration-300 motion-reduce:transition-none"
+              className="h-full flex-1 rounded-sm transition-all duration-500 ease-out motion-reduce:transition-none"
               style={{
                 backgroundColor: st === 'done' ? color : st === 'working' ? color : 'transparent',
                 borderColor: st === 'working' ? color : undefined,
                 borderWidth: st === 'working' ? '1px' : undefined,
                 opacity: st === 'todo' ? 0.25 : 1.0,
+                transform: st === 'done' ? 'scaleY(1.05)' : 'scaleY(1)',
               }}
             >
-              {st === 'working' && <div className="w-full h-full progress-striped" />}
+              {st === 'working' && <div className="w-full h-full progress-striped animate-pulse" />}
             </div>
           );
         })}

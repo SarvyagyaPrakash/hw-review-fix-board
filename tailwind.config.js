@@ -5,12 +5,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        canvas: 'var(--canvas)',
-        paper: 'var(--paper)',
+        canvas: 'rgb(var(--canvas-rgb, 228 225 219) / <alpha-value>)',
+        paper: 'rgb(var(--paper-rgb, 255 255 255) / <alpha-value>)',
         glass: 'var(--glass)',
-        ink: 'var(--ink)',
-        muted: 'var(--muted)',
-        hairline: 'var(--hairline)',
+        ink: 'rgb(var(--ink-rgb, 43 42 40) / <alpha-value>)',
+        muted: 'rgb(var(--muted-rgb, 107 102 94) / <alpha-value>)',
+        hairline: 'rgb(var(--hairline-rgb, 210 206 197) / <alpha-value>)',
         team: {
           'software-engineer': '#4A6FA5',
           'game-developer': '#5E8C6A',

@@ -147,7 +147,7 @@ export const ExplorerPage: React.FC = () => {
               setPage(1);
             }}
             placeholder="Search text or Player alias..."
-            className="w-full pl-8 pr-3 py-1.5 rounded-lg text-xs bg-canvas/40 border border-hairline text-ink outline-none focus:border-ink"
+            className="w-full pl-8 pr-3 py-1.5 rounded-lg text-xs bg-white dark:bg-[#191b1a] border border-hairline/80 dark:border-[#3A3C39] text-ink dark:text-[#ECEAE5] outline-none focus:border-ink dark:focus:border-hairline shadow-2xs transition-colors"
           />
         </div>
 
@@ -158,12 +158,12 @@ export const ExplorerPage: React.FC = () => {
             setStarFilter(e.target.value);
             setPage(1);
           }}
-          className="px-2.5 py-1.5 rounded-lg text-xs bg-canvas/40 border border-hairline text-ink outline-none cursor-pointer"
+          className="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-white dark:bg-[#191b1a] border border-hairline/80 dark:border-[#3A3C39] text-ink dark:text-[#ECEAE5] outline-none cursor-pointer shadow-2xs transition-colors"
         >
-          <option value="all">All Stars</option>
-          <option value="1">1 Star</option>
-          <option value="2">2 Stars</option>
-          <option value="3">3 Stars</option>
+          <option value="all" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">All Stars</option>
+          <option value="1" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">1 Star</option>
+          <option value="2" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">2 Stars</option>
+          <option value="3" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">3 Stars</option>
         </select>
 
         {/* Theme */}
@@ -173,11 +173,11 @@ export const ExplorerPage: React.FC = () => {
             setThemeFilter(e.target.value);
             setPage(1);
           }}
-          className="px-2.5 py-1.5 rounded-lg text-xs bg-canvas/40 border border-hairline text-ink outline-none cursor-pointer max-w-[180px] truncate"
+          className="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-white dark:bg-[#191b1a] border border-hairline/80 dark:border-[#3A3C39] text-ink dark:text-[#ECEAE5] outline-none cursor-pointer shadow-2xs transition-colors max-w-[180px] truncate"
         >
-          <option value="all">All Themes</option>
+          <option value="all" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">All Themes</option>
           {taxonomy?.themes.map((th) => (
-            <option key={th.id} value={th.id}>
+            <option key={th.id} value={th.id} className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">
               {th.name}
             </option>
           ))}
@@ -190,11 +190,11 @@ export const ExplorerPage: React.FC = () => {
             setActionableFilter(e.target.value);
             setPage(1);
           }}
-          className="px-2.5 py-1.5 rounded-lg text-xs bg-canvas/40 border border-hairline text-ink outline-none cursor-pointer"
+          className="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-white dark:bg-[#191b1a] border border-hairline/80 dark:border-[#3A3C39] text-ink dark:text-[#ECEAE5] outline-none cursor-pointer shadow-2xs transition-colors"
         >
-          <option value="all">All Actionable</option>
-          <option value="yes">Actionable only</option>
-          <option value="no">Non-actionable only</option>
+          <option value="all" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">All Actionable</option>
+          <option value="yes" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">Actionable only</option>
+          <option value="no" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">Non-actionable only</option>
         </select>
       </div>
 

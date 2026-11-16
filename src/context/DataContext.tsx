@@ -13,6 +13,7 @@ import {
   TEAM_DISPLAY_NAMES,
 } from '../types';
 import { z } from 'zod';
+import { taskStore } from '../store/TaskStore';
 
 interface DataContextType {
   loading: boolean;
@@ -153,6 +154,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setExperiments(expJson);
       setEvalData(evalJson);
       setLoading(false);
+      // Log initial viewing session
+      taskStore.recordViewer(actorName, viewingAsTeam);
     } catch (err) {
       console.error('Data loading error:', err);
       setError((err as Error).message || 'Failed to load static datasets');

@@ -212,7 +212,7 @@ export const BoardPage: React.FC = () => {
       </div>
 
       {/* 2. Filter Bar */}
-      <div className="p-4 rounded-2xl bg-paper/80 border border-hairline backdrop-blur-md space-y-3">
+      <div className="p-4 rounded-2xl bg-paper/85 dark:bg-[#232625]/90 border border-hairline/80 backdrop-blur-md space-y-3 shadow-xs">
         <div className="flex flex-wrap items-center gap-3">
           {/* Text Search */}
           <div className="relative flex-1 min-w-[220px]">
@@ -222,7 +222,7 @@ export const BoardPage: React.FC = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search reviews, problems, Player ####..."
-              className="w-full pl-9 pr-8 py-2 rounded-xl text-xs sm:text-sm bg-canvas/40 border border-hairline focus:border-ink outline-none text-ink placeholder:text-muted"
+              className="w-full pl-9 pr-8 py-2 rounded-xl text-xs sm:text-sm bg-white dark:bg-[#191b1a] border border-hairline/80 dark:border-[#3A3C39] focus:border-ink dark:focus:border-hairline outline-none text-ink dark:text-[#ECEAE5] placeholder:text-muted shadow-2xs transition-colors"
             />
             {searchQuery && (
               <button
@@ -242,11 +242,11 @@ export const BoardPage: React.FC = () => {
               aria-label="Sort reviews"
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as 'priority' | 'newest' | 'thumbs')}
-              className="px-3 py-2 rounded-xl text-xs font-semibold bg-canvas/40 border border-hairline text-ink outline-none cursor-pointer"
+              className="px-3 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-[#191b1a] border border-hairline/80 dark:border-[#3A3C39] text-ink dark:text-[#ECEAE5] outline-none cursor-pointer shadow-2xs transition-colors"
             >
-              <option value="priority">Priority formula</option>
-              <option value="newest">Newest first</option>
-              <option value="thumbs">Most thumbs-up</option>
+              <option value="priority" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">Priority formula</option>
+              <option value="newest" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">Newest first</option>
+              <option value="thumbs" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">Most thumbs-up</option>
             </select>
           </div>
         </div>
@@ -263,12 +263,12 @@ export const BoardPage: React.FC = () => {
             aria-label="Filter by task status"
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-2.5 py-1.5 rounded-lg bg-canvas/40 border border-hairline text-ink outline-none cursor-pointer"
+            className="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-white dark:bg-[#191b1a] border border-hairline/80 dark:border-[#3A3C39] text-ink dark:text-[#ECEAE5] outline-none cursor-pointer shadow-2xs transition-colors"
           >
-            <option value="all">All statuses</option>
-            <option value="todo">To do</option>
-            <option value="working">Working</option>
-            <option value="done">Done</option>
+            <option value="all" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">All statuses</option>
+            <option value="todo" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">To do</option>
+            <option value="working" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">Working</option>
+            <option value="done" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">Done</option>
           </select>
 
           {/* Theme */}
@@ -276,11 +276,11 @@ export const BoardPage: React.FC = () => {
             aria-label="Filter by issue theme"
             value={filterTheme}
             onChange={(e) => setFilterTheme(e.target.value)}
-            className="px-2.5 py-1.5 rounded-lg bg-canvas/40 border border-hairline text-ink outline-none cursor-pointer max-w-[180px] truncate"
+            className="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-white dark:bg-[#191b1a] border border-hairline/80 dark:border-[#3A3C39] text-ink dark:text-[#ECEAE5] outline-none cursor-pointer shadow-2xs transition-colors max-w-[180px] truncate"
           >
-            <option value="all">All themes</option>
+            <option value="all" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">All themes</option>
             {taxonomy?.themes.map((th) => (
-              <option key={th.id} value={th.id}>
+              <option key={th.id} value={th.id} className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">
                 {th.name}
               </option>
             ))}
@@ -291,12 +291,12 @@ export const BoardPage: React.FC = () => {
             aria-label="Filter by issue severity"
             value={filterSeverity}
             onChange={(e) => setFilterSeverity(e.target.value)}
-            className="px-2.5 py-1.5 rounded-lg bg-canvas/40 border border-hairline text-ink outline-none cursor-pointer"
+            className="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-white dark:bg-[#191b1a] border border-hairline/80 dark:border-[#3A3C39] text-ink dark:text-[#ECEAE5] outline-none cursor-pointer shadow-2xs transition-colors"
           >
-            <option value="all">All severities</option>
-            <option value="3">Severity 3 (Critical)</option>
-            <option value="2">Severity 2 (Major)</option>
-            <option value="1">Severity 1 (Minor)</option>
+            <option value="all" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">All severities</option>
+            <option value="3" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">Severity 3 (Critical)</option>
+            <option value="2" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">Severity 2 (Major)</option>
+            <option value="1" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">Severity 1 (Minor)</option>
           </select>
 
           {/* Star rating */}
@@ -304,12 +304,12 @@ export const BoardPage: React.FC = () => {
             aria-label="Filter by review stars"
             value={filterStars}
             onChange={(e) => setFilterStars(e.target.value)}
-            className="px-2.5 py-1.5 rounded-lg bg-canvas/40 border border-hairline text-ink outline-none cursor-pointer"
+            className="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-white dark:bg-[#191b1a] border border-hairline/80 dark:border-[#3A3C39] text-ink dark:text-[#ECEAE5] outline-none cursor-pointer shadow-2xs transition-colors"
           >
-            <option value="all">All star ratings</option>
-            <option value="1">1 star</option>
-            <option value="2">2 stars</option>
-            <option value="3">3 stars</option>
+            <option value="all" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">All star ratings</option>
+            <option value="1" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">1 star</option>
+            <option value="2" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">2 stars</option>
+            <option value="3" className="bg-white dark:bg-[#232625] text-ink dark:text-[#ECEAE5]">3 stars</option>
           </select>
 
           {/* Active Filter Clear */}

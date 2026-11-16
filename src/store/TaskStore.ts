@@ -116,6 +116,28 @@ export class TaskStoreManager {
           (payload) => {
             const note = payload.new as TaskNoteRecord;
             if (note) {
+              // 1. Deduplicate by exact remote ID
+              const existingById = this.notes.findIndex((n) => n.id === note.id);
+              if (existingById !== -1) {
+                this.notes[existingById] = note;
+                this.notify('note', note);
+                return;
+              }
+
+              // 2. Deduplicate matching optimistic note created within 30 seconds
+              const optIdx = this.notes.findIndex(
+                (n) =>
+                  n.review_id === note.review_id &&
+                  n.team === note.team &&
+                  n.body.trim() === note.body.trim() &&
+                  Math.abs(new Date(n.created_at).getTime() - new Date(note.created_at).getTime()) < 30000
+              );
+              if (optIdx !== -1) {
+                this.notes[optIdx] = note;
+                this.notify('note', note);
+                return;
+              }
+
               this.notes.unshift(note);
               this.notify('note', note);
             }
@@ -127,6 +149,28 @@ export class TaskStoreManager {
           (payload) => {
             const act = payload.new as TaskActivityRecord;
             if (act) {
+              // Deduplicate activity if matching id or matching optimistic act within 30 seconds
+              const existingById = this.activities.findIndex((a) => a.id === act.id);
+              if (existingById !== -1) {
+                this.activities[existingById] = act;
+                this.notify('status', act);
+                return;
+              }
+
+              const optIdx = this.activities.findIndex(
+                (a) =>
+                  a.review_id === act.review_id &&
+                  a.team === act.team &&
+                  a.kind === act.kind &&
+                  a.to_value === act.to_value &&
+                  Math.abs(new Date(a.created_at).getTime() - new Date(act.created_at).getTime()) < 30000
+              );
+              if (optIdx !== -1) {
+                this.activities[optIdx] = act;
+                this.notify('status', act);
+                return;
+              }
+
               this.activities.unshift(act);
               this.notify('status', act);
             }
@@ -279,15 +323,28 @@ export class TaskStoreManager {
     body: string,
     author: string
   ): Promise<boolean> {
+    const tempId = Date.now();
     const newNote: TaskNoteRecord = {
-      id: Date.now(),
+      id: tempId,
       review_id: reviewId,
       team,
-      body,
+      body: body.trim(),
       author,
       created_at: new Date().toISOString(),
     };
     this.notes.unshift(newNote);
+
+    const actRow: TaskActivityRecord = {
+      id: tempId + 1,
+      review_id: reviewId,
+      team,
+      kind: 'note',
+      from_value: null,
+      to_value: body.trim().slice(0, 60),
+      actor: author,
+      created_at: new Date().toISOString(),
+    };
+    this.activities.unshift(actRow);
     this.notify('note', newNote);
 
     if (this.supabase && !this.isLocalOnly) {
@@ -295,16 +352,24 @@ export class TaskStoreManager {
         const { data, error } = await this.supabase.rpc('add_note', {
           p_review_id: reviewId,
           p_team: team,
-          p_body: body,
+          p_body: body.trim(),
           p_author: author,
         });
         if (error) throw error;
-        if (data && data.id) {
-          newNote.id = data.id;
+        // Supabase returns either the raw ID number or an object
+        if (data) {
+          const realId = typeof data === 'object' && data !== null && 'id' in data ? (data as { id: number }).id : Number(data);
+          if (!isNaN(realId)) {
+            newNote.id = realId;
+          }
         }
         return true;
       } catch (err) {
         console.error('Remote add_note failed:', err);
+        // Rollback optimistic entries
+        this.notes = this.notes.filter((n) => n.id !== tempId);
+        this.activities = this.activities.filter((a) => a.id !== tempId + 1);
+        this.notify('note', { reviewId, team });
         return false;
       }
     }
@@ -312,9 +377,39 @@ export class TaskStoreManager {
   }
 
   public getNotes(reviewId: string, team?: TeamId): TaskNoteRecord[] {
-    return this.notes.filter(
+    const list = this.notes.filter(
       (n) => n.review_id === reviewId && (!team || n.team === team)
     );
+    // Deduplicate in case of duplicate entries
+    const seen = new Set<string>();
+    const unique: TaskNoteRecord[] = [];
+    for (const n of list) {
+      const keyId = `id-${n.id}`;
+      const timeBucket = Math.floor(new Date(n.created_at).getTime() / 15000);
+      const keyContent = `${n.body.trim()}-${n.author || ''}-${timeBucket}`;
+      if (!seen.has(keyId) && !seen.has(keyContent)) {
+        seen.add(keyId);
+        seen.add(keyContent);
+        unique.push(n);
+      }
+    }
+    return unique.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
+  }
+
+  public recordViewer(actor: string, team: TeamId): void {
+    const actRow: TaskActivityRecord = {
+      id: Date.now(),
+      review_id: 'board',
+      team,
+      kind: 'viewing',
+      from_value: null,
+      to_value: team,
+      actor,
+      created_at: new Date().toISOString(),
+    };
+    this.activities.unshift(actRow);
+    if (this.activities.length > 100) this.activities.pop();
+    this.notify('status', actRow);
   }
 
   public getActivities(limit = 50): TaskActivityRecord[] {

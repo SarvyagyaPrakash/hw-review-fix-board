@@ -176,7 +176,7 @@ export interface TaskActivityRecord {
   id: number;
   review_id: string;
   team: TeamId;
-  kind: 'status' | 'assignee' | 'note';
+  kind: 'status' | 'assignee' | 'note' | 'viewing';
   from_value: string | null;
   to_value: string | null;
   actor: string | null;
