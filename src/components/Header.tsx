@@ -41,7 +41,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenActivity }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         {/* Brand & Route Links */}
         <div className="flex items-center gap-8">
-          <NavLink to="/" className="font-heading font-extrabold text-lg sm:text-xl text-ink tracking-tight flex items-center gap-2">
+          <NavLink to="/" className="font-heading font-extrabold text-lg sm:text-xl text-ink tracking-tight flex items-center gap-2.5 group">
+            <img src="/favicon.png" alt="Hitwicket" className="w-6 h-6 rounded-lg shadow-2xs group-hover:scale-105 transition-transform" />
             <span>HW Review-Fix Board</span>
           </NavLink>
 
