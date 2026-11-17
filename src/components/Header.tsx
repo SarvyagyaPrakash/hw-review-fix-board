@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useData } from '../context/DataContext';
 import { taskStore } from '../store/TaskStore';
 import { TeamId, TEAM_DISPLAY_NAMES, TEAM_COLORS } from '../types';
-import { Sun, Moon, History } from 'lucide-react';
+import { Sun, Moon, History, Info } from 'lucide-react';
 import { SelectMenu, SelectOption } from './ui/SelectMenu';
+import { InfoModal } from './InfoModal';
 
 interface HeaderProps {
   onOpenActivity: () => void;
@@ -12,6 +13,24 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ onOpenActivity }) => {
   const { viewingAsTeam, setViewingAsTeam, setActorName, theme, toggleTheme } = useData();
+  const [isInfoOpen, setIsInfoOpen] = useState(false);
+  const [hasInteractedWithInfo, setHasInteractedWithInfo] = useState(() => {
+    try {
+      return sessionStorage.getItem('hw_info_seen') === 'true';
+    } catch {
+      return false;
+    }
+  });
+
+  const handleOpenInfo = () => {
+    setIsInfoOpen(true);
+    setHasInteractedWithInfo(true);
+    try {
+      sessionStorage.setItem('hw_info_seen', 'true');
+    } catch {
+      // Ignore
+    }
+  };
 
   const isLocalOnly = taskStore.isLocalOnly;
 
@@ -105,8 +124,25 @@ export const Header: React.FC<HeaderProps> = ({ onOpenActivity }) => {
           >
             {theme === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
           </button>
+
+          {/* Info "i" Button */}
+          <button
+            type="button"
+            onClick={handleOpenInfo}
+            title="About HW Review-Fix Board"
+            className={`w-9 h-9 flex items-center justify-center rounded-full border shadow-2xs transition-all active:scale-95 ${
+              !hasInteractedWithInfo
+                ? 'border-indigo-500 bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 ring-2 ring-indigo-500/70 animate-pulse shadow-md shadow-indigo-500/25 font-bold'
+                : 'border-hairline dark:border-[#3A3C39] bg-paper text-muted hover:text-ink hover:bg-canvas/50'
+            }`}
+          >
+            <Info className="w-4 h-4" />
+          </button>
         </div>
       </div>
+
+      {/* Info Modal */}
+      <InfoModal isOpen={isInfoOpen} onClose={() => setIsInfoOpen(false)} />
     </header>
   );
 };
