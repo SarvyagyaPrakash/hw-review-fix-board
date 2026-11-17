@@ -45,7 +45,7 @@ export const SelectMenu: React.FC<SelectMenuProps> = ({
     if (isOpen && containerRef.current) {
       const rect = containerRef.current.getBoundingClientRect();
       const spaceBelow = window.innerHeight - rect.bottom;
-      if (spaceBelow < 280 && rect.top > 280) {
+      if (spaceBelow < 300 && rect.top > 300) {
         setOpenUpward(true);
       } else {
         setOpenUpward(false);
@@ -124,7 +124,7 @@ export const SelectMenu: React.FC<SelectMenuProps> = ({
           role="listbox"
           aria-label={ariaLabel}
           style={{ backgroundColor: 'var(--paper)' }}
-          className={`absolute z-50 min-w-[220px] max-w-[320px] rounded-2xl border border-hairline dark:border-[#3A3C39] bg-white dark:bg-[#1c1e1d] shadow-2xl ring-1 ring-black/10 dark:ring-white/10 p-1.5 space-y-0.5 outline-none transition-all duration-150 max-h-72 overflow-y-auto ${
+          className={`absolute z-50 min-w-[220px] max-w-[320px] rounded-2xl border border-hairline dark:border-[#3A3C39] bg-white dark:bg-[#1c1e1d] shadow-2xl ring-1 ring-black/10 dark:ring-white/10 p-1.5 space-y-0.5 outline-none transition-all duration-150 max-h-80 overflow-y-auto ${
             openUpward ? 'bottom-full mb-1.5 origin-bottom' : 'top-full mt-1.5 origin-top'
           } ${align === 'right' ? 'right-0' : 'left-0'} ${menuClassName}`}
         >

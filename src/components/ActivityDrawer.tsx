@@ -29,7 +29,7 @@ export const ActivityDrawer: React.FC<ActivityDrawerProps> = ({ isOpen, onClose 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden bg-black/40 backdrop-blur-xs flex justify-end">
+    <div className="fixed inset-0 z-[60] overflow-hidden bg-black/40 backdrop-blur-xs flex justify-end">
       <div
         role="dialog"
         aria-label="Recent activity log"

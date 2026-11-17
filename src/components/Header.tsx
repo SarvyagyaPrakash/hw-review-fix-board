@@ -49,7 +49,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenActivity }) => {
   }));
 
   return (
-    <header className="sticky top-0 z-30 border-b border-hairline/80 bg-paper/85 dark:bg-[#1c1e1d]/85 backdrop-blur-md transition-colors">
+    <header className="sticky top-0 z-50 border-b border-hairline/80 bg-paper/85 dark:bg-[#1c1e1d]/85 backdrop-blur-md transition-colors">
       {/* Local-only Banner if no Supabase credentials */}
       {isLocalOnly && (
         <div className="bg-amber-500/10 border-b border-amber-500/20 py-1 px-4 text-center text-xs font-medium text-amber-800 dark:text-amber-200">
