@@ -121,6 +121,30 @@ export const PriorityRankingSchema = z.object({
 });
 export type PriorityRanking = z.infer<typeof PriorityRankingSchema>;
 
+export const ReleaseRegressionSchema = z.object({
+  version: z.string(),
+  theme: z.string(),
+  theme_name: z.string(),
+  count: z.number(),
+  version_total: z.number(),
+  theme_share_pct: z.number(),
+  base_share_pct: z.number(),
+  ratio: z.number(),
+  start_date: z.string(),
+  end_date: z.string(),
+  owning_teams: z.array(TeamIdSchema),
+  quotes: z.array(
+    z.object({
+      quote: z.string(),
+      alias: z.string(),
+      stars: z.number().optional(),
+      date: z.string().optional(),
+      problem: z.string().optional(),
+    })
+  ),
+});
+export type ReleaseRegression = z.infer<typeof ReleaseRegressionSchema>;
+
 export const InsightsSchema = z.object({
   generated_at: z.string(),
   total_reviews: z.number(),
@@ -130,7 +154,8 @@ export const InsightsSchema = z.object({
   severity_mix: z.record(z.number()),
   star_distribution: z.record(z.number()),
   version_trends: z.record(z.record(z.number())),
-  weekly_trends: z.record(z.number()).optional(),
+  weekly_trends: z.record(z.any()).optional(),
+  release_regressions: z.array(ReleaseRegressionSchema).optional(),
   reply_stats: z.object({
     available: z.boolean(),
     note: z.string(),

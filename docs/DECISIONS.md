@@ -73,3 +73,11 @@ This log documents all architectural decisions, alternatives considered, and jus
 - **Decision**: Update `TEAM_DISPLAY_NAMES` across the UI to prepend "Team" to each discipline (e.g., "Team Data Analyst", "Team Growth Analyst", "Team Software Engineer").
 - **Alternative**: Displaying role names without the "Team" prefix.
 - **Reason**: User requested clear team ownership signposting across the board, sidebar, and progress indicators.
+
+---
+
+### 9. Automated Release Regression & Anomaly Detector
+- **Date**: 2026-11-17
+- **Decision**: Added automated anomaly detection that tracks complaint volume per app version and week. Flags releases where a complaint theme exceeded $2\times$ its normal baseline volume with $\ge 12$ total version reviews and $\ge 4$ theme complaints.
+- **Alternative**: Manual review skimming or generic monthly averages.
+- **Reason**: Pinpoints the exact release that introduced code breakages (e.g., v12.31.0 Release Quality 4.05x spike; v12.41.1 Matchmaking 2.6x spike) with verbatim player quotes and routes them to Team Software Engineer and Team Product Analyst.

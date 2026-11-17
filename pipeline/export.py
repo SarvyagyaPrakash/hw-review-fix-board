@@ -245,6 +245,97 @@ def export_all():
                 th = iss.get("theme", "other")
                 version_trends[v][th] = version_trends[v].get(th, 0) + 1
 
+    # Weekly theme trends (ISO calendar year-week)
+    for r in final_reviews:
+        if not r.get("actionable") or not r.get("date"):
+            continue
+        try:
+            dt = datetime.datetime.strptime(r["date"], "%Y-%m-%d")
+            y, w, _ = dt.isocalendar()
+            wk = f"{y}-W{w:02d}"
+            if wk not in weekly_counts:
+                weekly_counts[wk] = {}
+            for iss in r.get("issues", []):
+                th = iss.get("theme", "other")
+                weekly_counts[wk][th] = weekly_counts[wk].get(th, 0) + 1
+        except Exception:
+            continue
+
+    # Automated Release Regression & Spike Detection
+    # Detects releases where a complaint theme jumped >= 2.0x normal baseline share
+    theme_names = {t["id"]: t["name"] for t in taxonomy["themes"]}
+    theme_teams = {t["id"]: t["teams"] for t in taxonomy["themes"]}
+    global_theme_share = {t["id"]: theme_counts.get(t["id"], 0) / (actionable_count if actionable_count > 0 else 1.0) for t in taxonomy["themes"]}
+
+    ver_reviews = {}
+    ver_dates = {}
+    for r in final_reviews:
+        if not r.get("actionable") or not r.get("version"):
+            continue
+        v = r["version"]
+        if v not in ver_reviews:
+            ver_reviews[v] = []
+        ver_reviews[v].append(r)
+        if r.get("date"):
+            try:
+                d = datetime.datetime.strptime(r["date"], "%Y-%m-%d")
+                if v not in ver_dates:
+                    ver_dates[v] = [d, d]
+                else:
+                    ver_dates[v][0] = min(ver_dates[v][0], d)
+                    ver_dates[v][1] = max(ver_dates[v][1], d)
+            except Exception:
+                pass
+
+    release_regressions = []
+    for v, r_list in ver_reviews.items():
+        if len(r_list) < 12:  # Minimum volume filter to suppress single-user noise
+            continue
+        earliest_dt = ver_dates.get(v, [datetime.datetime(2026, 1, 1), datetime.datetime(2026, 1, 1)])[0]
+        latest_dt = ver_dates.get(v, [datetime.datetime(2026, 1, 1), datetime.datetime(2026, 1, 1)])[1]
+        
+        v_theme_counts = {}
+        v_quotes = {}
+        for r in r_list:
+            for iss in r.get("issues", []):
+                th = iss.get("theme", "other")
+                v_theme_counts[th] = v_theme_counts.get(th, 0) + 1
+                if th not in v_quotes:
+                    v_quotes[th] = []
+                if iss.get("evidence"):
+                    v_quotes[th].append({
+                        "quote": iss.get("evidence"),
+                        "alias": r.get("alias", "Player"),
+                        "stars": r.get("stars", 1),
+                        "date": r.get("date", ""),
+                        "problem": iss.get("problem", "")
+                    })
+
+        for th, cnt in v_theme_counts.items():
+            v_share = cnt / len(r_list)
+            base_share = global_theme_share.get(th, 0.05)
+            # Threshold: >= 2.0x normal baseline share and at least 4 complaints
+            if v_share >= 2.0 * base_share and cnt >= 4:
+                owners = list(theme_teams.get(th, ["software-engineer", "product-analyst"]))
+                if "product-analyst" not in owners and len(owners) < 3:
+                    owners.append("product-analyst")
+                release_regressions.append({
+                    "version": v,
+                    "theme": th,
+                    "theme_name": theme_names.get(th, th),
+                    "count": cnt,
+                    "version_total": len(r_list),
+                    "theme_share_pct": round(v_share * 100.0, 1),
+                    "base_share_pct": round(base_share * 100.0, 1),
+                    "ratio": round(v_share / (base_share if base_share > 0 else 0.01), 2),
+                    "start_date": earliest_dt.strftime("%Y-%m-%d"),
+                    "end_date": latest_dt.strftime("%Y-%m-%d"),
+                    "owning_teams": owners,
+                    "quotes": v_quotes.get(th, [])[:3]
+                })
+
+    release_regressions.sort(key=lambda x: x["ratio"], reverse=True)
+
     insights_data = {
         "generated_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         "total_reviews": len(final_reviews),
@@ -255,6 +346,7 @@ def export_all():
         "star_distribution": star_distribution,
         "version_trends": version_trends,
         "weekly_trends": weekly_counts,
+        "release_regressions": release_regressions,
         "reply_stats": {
             "available": False,
             "note": "Developer replies were not present or recorded on the majority of collected public reviews."
