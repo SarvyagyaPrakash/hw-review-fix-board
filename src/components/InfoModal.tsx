@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { X, Layers, Activity, Sparkles, Check } from 'lucide-react';
 
 interface InfoModalProps {
@@ -11,23 +12,34 @@ export const InfoModal: React.FC<InfoModalProps> = ({ isOpen, onClose }) => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isOpen) onClose();
     };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', handleKeyDown);
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div
       role="dialog"
       aria-modal="true"
       aria-labelledby="info-modal-title"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-200"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-black/65 backdrop-blur-sm overflow-y-auto animate-in fade-in duration-200"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="w-full max-w-md rounded-2xl border border-hairline/80 dark:border-[#3A3C39] bg-paper shadow-2xl p-6 space-y-4 animate-in zoom-in-95 duration-150">
+      <div 
+        className="w-full max-w-md my-auto max-h-[90vh] overflow-y-auto rounded-2xl border border-hairline/80 dark:border-[#3A3C39] bg-white dark:bg-[#1c1e1d] shadow-2xl p-6 space-y-4 animate-in zoom-in-95 duration-150"
+        style={{ backgroundColor: 'var(--paper)' }}
+      >
         {/* Header */}
         <div className="flex items-center justify-between pb-3 border-b border-hairline/60">
           <div className="flex items-center gap-2.5">
@@ -90,13 +102,14 @@ export const InfoModal: React.FC<InfoModalProps> = ({ isOpen, onClose }) => {
           <button
             type="button"
             onClick={onClose}
-            className="w-full h-9 flex items-center justify-center gap-1.5 rounded-xl text-xs font-semibold bg-ink text-paper hover:opacity-90 active:scale-95 transition-all shadow-2xs"
+            className="w-full h-10 flex items-center justify-center gap-1.5 rounded-xl text-xs font-semibold bg-ink text-paper hover:opacity-90 active:scale-95 transition-all shadow-2xs"
           >
             <Check className="w-3.5 h-3.5" />
             <span>Got it, let’s explore</span>
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
