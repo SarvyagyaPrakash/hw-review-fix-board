@@ -19,6 +19,19 @@ interface ReviewCardProps {
   onStatusChangeError?: (msg: string) => void;
 }
 
+function formatReviewDate(dStr: string): string {
+  try {
+    const parts = dStr.split('-');
+    if (parts.length === 3) {
+      const d = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+      return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+    return dStr;
+  } catch {
+    return dStr;
+  }
+}
+
 export const ReviewCard: React.FC<ReviewCardProps> = ({
   review,
   selectedTeam,
@@ -176,7 +189,7 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
           {review.date && (
             <>
               <span className="text-hairline">•</span>
-              <span>{review.date}</span>
+              <span>{formatReviewDate(review.date)}</span>
             </>
           )}
         </div>

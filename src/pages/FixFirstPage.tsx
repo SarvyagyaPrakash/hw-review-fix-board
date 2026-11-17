@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useData } from '../context/DataContext';
 import { TEAM_COLORS, TEAM_DISPLAY_NAMES } from '../types';
 import { Printer, Copy, Check, Info, Sparkles, TrendingUp, ShieldCheck } from 'lucide-react';
@@ -7,6 +7,21 @@ export const FixFirstPage: React.FC = () => {
   const { insights, reviews, experiments } = useData();
   const [copied, setCopied] = useState(false);
   const [activeFormulaPopover, setActiveFormulaPopover] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handleOutside = () => setActiveFormulaPopover(null);
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setActiveFormulaPopover(null);
+    };
+    if (activeFormulaPopover) {
+      window.addEventListener('click', handleOutside);
+      window.addEventListener('keydown', handleKey);
+    }
+    return () => {
+      window.removeEventListener('click', handleOutside);
+      window.removeEventListener('keydown', handleKey);
+    };
+  }, [activeFormulaPopover]);
 
   const topThemes = useMemo(() => {
     if (!insights) return [];
@@ -185,11 +200,12 @@ export const FixFirstPage: React.FC = () => {
                   <div className="relative">
                     <button
                       type="button"
-                      onClick={() =>
+                      onClick={(e) => {
+                        e.stopPropagation();
                         setActiveFormulaPopover(
                           activeFormulaPopover === item.theme ? null : item.theme
-                        )
-                      }
+                        );
+                      }}
                       className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-canvas text-ink font-heading font-black text-sm border border-hairline hover:bg-hairline/60 transition-colors"
                     >
                       <TrendingUp className="w-3.5 h-3.5 text-muted" />
@@ -199,7 +215,10 @@ export const FixFirstPage: React.FC = () => {
 
                     {/* Mathematical Formula Explanation Popover */}
                     {activeFormulaPopover === item.theme && (
-                      <div className="absolute right-0 top-full mt-2 w-80 p-4 rounded-xl bg-paper border border-hairline shadow-2xl z-40 text-xs text-ink space-y-2.5">
+                      <div 
+                        onClick={(e) => e.stopPropagation()}
+                        className="absolute right-0 top-full mt-2 w-80 p-4 rounded-xl bg-paper border border-hairline shadow-2xl z-40 text-xs text-ink space-y-2.5 animate-in fade-in zoom-in-95 duration-150"
+                      >
                         <div className="flex justify-between items-center font-bold text-ink border-b border-hairline/60 pb-1.5">
                           <span>Priority Scoring Working</span>
                           <button

@@ -5,6 +5,20 @@ import { TEAM_DISPLAY_NAMES } from '../types';
 import { Search, Download, Star, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from 'lucide-react';
 import { SelectMenu, SelectOption } from '../components/ui/SelectMenu';
 
+function formatReviewDate(dStr: string | null | undefined): string {
+  if (!dStr) return '—';
+  try {
+    const parts = dStr.split('-');
+    if (parts.length === 3) {
+      const d = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+      return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+    return dStr;
+  } catch {
+    return dStr;
+  }
+}
+
 export const ExplorerPage: React.FC = () => {
   const { reviews, taxonomy } = useData();
 
@@ -239,7 +253,7 @@ export const ExplorerPage: React.FC = () => {
                         {r.stars} <Star className="w-3 h-3 fill-current" />
                       </span>
                     </td>
-                    <td className="py-3 px-3 text-muted whitespace-nowrap">{r.date || '—'}</td>
+                    <td className="py-3 px-3 text-muted whitespace-nowrap">{formatReviewDate(r.date)}</td>
                     <td className="py-3 px-3 text-muted whitespace-nowrap">{r.version ? `v${r.version}` : '—'}</td>
                     <td className="py-3 px-3 text-muted whitespace-nowrap">{r.thumbs}</td>
                     <td className="py-3 px-3">

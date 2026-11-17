@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useData } from '../context/DataContext';
 import { ReviewCard } from '../components/ReviewCard';
 import { taskStore } from '../store/TaskStore';
@@ -8,14 +9,34 @@ import { SelectMenu, SelectOption } from '../components/ui/SelectMenu';
 
 export const BoardPage: React.FC = () => {
   const { reviews, selectedTeam, taxonomy } = useData();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   // Filters & Search
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(() => searchParams.get('search') || '');
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [filterTheme, setFilterTheme] = useState<string>('all');
   const [filterSeverity, setFilterSeverity] = useState<string>('all');
   const [filterStars, setFilterStars] = useState<string>('all');
   const [sortBy, setSortBy] = useState<'priority' | 'newest' | 'thumbs'>('priority');
+
+  // Sync searchQuery when searchParams change externally (e.g. from Insights regression link)
+  useEffect(() => {
+    const q = searchParams.get('search');
+    if (q !== null && q !== searchQuery) {
+      setSearchQuery(q);
+    }
+  }, [searchParams]);
+
+  const handleSearchChange = (val: string) => {
+    setSearchQuery(val);
+    const newParams = new URLSearchParams(searchParams);
+    if (val.trim()) {
+      newParams.set('search', val);
+    } else {
+      newParams.delete('search');
+    }
+    setSearchParams(newParams, { replace: true });
+  };
 
   // Pagination (25 at a time)
   const [visibleCount, setVisibleCount] = useState(25);
@@ -160,7 +181,7 @@ export const BoardPage: React.FC = () => {
     (filterStars !== 'all' ? 1 : 0);
 
   const clearAllFilters = () => {
-    setSearchQuery('');
+    handleSearchChange('');
     setFilterStatus('all');
     setFilterTheme('all');
     setFilterSeverity('all');
@@ -263,14 +284,14 @@ export const BoardPage: React.FC = () => {
             <input
               type="text"
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => handleSearchChange(e.target.value)}
               placeholder="Search reviews, problems, Player ####..."
               className="w-full h-10 pl-10 pr-9 rounded-xl text-xs sm:text-sm bg-white dark:bg-[#1a1c1b] border border-hairline dark:border-[#3A3C39] focus:border-ink outline-none text-ink placeholder:text-muted shadow-2xs transition-colors"
             />
             {searchQuery && (
               <button
                 type="button"
-                onClick={() => setSearchQuery('')}
+                onClick={() => handleSearchChange('')}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-ink"
               >
                 <X className="w-4 h-4" />

@@ -75,7 +75,8 @@ export const Sidebar: React.FC = () => {
             <button
               key={id}
               type="button"
-              onClick={() => setSelectedTeam(id)}
+              onClick={() => setSelectedTeam(isSelected ? null : id)}
+              title={isSelected ? 'Click to show all teams' : `Filter by ${name}`}
               className={`flex items-center justify-between px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all shrink-0 lg:w-full ${
                 isSelected
                   ? 'bg-ink text-paper shadow-sm'
