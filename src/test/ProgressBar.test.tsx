@@ -13,7 +13,7 @@ describe('ProgressBar Component', () => {
     render(<ProgressBar teams={teams} statuses={statuses} />);
     const bar = screen.getByRole('progressbar');
     expect(bar).toHaveAttribute('aria-valuenow', '0');
-    expect(screen.getByText(/0% complete · waiting on Product Analyst/i)).toBeInTheDocument();
+    expect(screen.getByText(/0% complete · waiting on Team Product Analyst/i)).toBeInTheDocument();
   });
 
   it('renders 2-team review with 1 Done as 50% on both views', () => {
@@ -26,7 +26,7 @@ describe('ProgressBar Component', () => {
     render(<ProgressBar teams={teams} statuses={statuses} />);
     const bar = screen.getByRole('progressbar');
     expect(bar).toHaveAttribute('aria-valuenow', '50');
-    expect(screen.getByText(/50% complete · waiting on Product Analyst/i)).toBeInTheDocument();
+    expect(screen.getByText(/50% complete · waiting on Team Product Analyst/i)).toBeInTheDocument();
   });
 
   it('renders 3-team review with 2 Done as 67%', () => {
@@ -40,7 +40,7 @@ describe('ProgressBar Component', () => {
     render(<ProgressBar teams={teams} statuses={statuses} />);
     const bar = screen.getByRole('progressbar');
     expect(bar).toHaveAttribute('aria-valuenow', '67');
-    expect(screen.getByText(/67% complete · waiting on Data Analyst/i)).toBeInTheDocument();
+    expect(screen.getByText(/67% complete · waiting on Team Data Analyst/i)).toBeInTheDocument();
   });
 
   it('renders Completed badge at 100% when all teams finish', () => {

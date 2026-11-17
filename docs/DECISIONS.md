@@ -65,3 +65,11 @@ This log documents all architectural decisions, alternatives considered, and jus
 - **Decision**: In the Explorer CSV export, any cell beginning with `=, +, -, @` is automatically escaped with an apostrophe prefix (`'`).
 - **Alternative**: Raw string output.
 - **Reason**: Protects users opening exported files in Microsoft Excel or Google Sheets from arbitrary command execution vulnerabilities.
+
+---
+
+### 8. Team Display Name Prefix ("Team <Role>")
+- **Date**: 2026-11-17
+- **Decision**: Update `TEAM_DISPLAY_NAMES` across the UI to prepend "Team" to each discipline (e.g., "Team Data Analyst", "Team Growth Analyst", "Team Software Engineer").
+- **Alternative**: Displaying role names without the "Team" prefix.
+- **Reason**: User requested clear team ownership signposting across the board, sidebar, and progress indicators.

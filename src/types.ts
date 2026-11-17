@@ -15,15 +15,15 @@ export const TeamIdSchema = z.enum([
 export type TeamId = z.infer<typeof TeamIdSchema>;
 
 export const TEAM_DISPLAY_NAMES: Record<TeamId, string> = {
-  'software-engineer': 'Software Engineer',
-  'game-developer': 'Game Developer',
-  'product-analyst': 'Product Analyst',
-  'product-associate': 'Product Associate',
-  'data-analyst': 'Data Analyst',
-  'ui-ux-designer': 'UI/UX Designer',
-  'growth-analyst': 'Growth Analyst',
-  'marketing-associate': 'Marketing Associate',
-  'founders-office': 'Founder’s Office',
+  'software-engineer': 'Team Software Engineer',
+  'game-developer': 'Team Game Developer',
+  'product-analyst': 'Team Product Analyst',
+  'product-associate': 'Team Product Associate',
+  'data-analyst': 'Team Data Analyst',
+  'ui-ux-designer': 'Team UI/UX Designer',
+  'growth-analyst': 'Team Growth Analyst',
+  'marketing-associate': 'Team Marketing Associate',
+  'founders-office': 'Team Founder’s Office',
 };
 
 export const TEAM_COLORS: Record<TeamId, string> = {
